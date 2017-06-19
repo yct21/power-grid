@@ -1,0 +1,27 @@
+{
+  "name": "power-grid",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jest": "^20.0.0",
+    "@types/node": "^7.0.31",
+    "@types/react": "^15.0.29",
+    "@types/react-dom": "^15.5.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "html-webpack-include-assets-plugin": "^0.0.5",
+    "html-webpack-plugin": "^2.28.0",
+    "react-scripts-ts": "2.2.0",
+    "webpack": "^2.6.1"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  }
+}
