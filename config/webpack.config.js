@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const FriendlyErrors = require("friendly-errors-webpack-plugin");
+const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
 
 // environment parameters
 const developmentEnvParameters = require("./env.development.json");
@@ -18,7 +19,7 @@ const buildFolder = path.join(projectRoot, "build");
 const { devServerPort } = developmentEnvParameters;
 
 function entryConfig(env) {
-  const entryFile = path.join(projectRoot, "frontend/index.tsx");
+  const entryFile = path.join(projectRoot, "frontend/entry/index.ts");
   const webpackHotMiddlewareEntry
     = `webpack-hot-middleware/client?path=http://localhost:${devServerPort}/__webpack_hmr`;
 
@@ -65,7 +66,7 @@ function outputConfig(env) {
     return {
       path: path.join(buildFolder, "development"),
       pathinfo: true,
-      publicPath: "http://localhost:${devServerPort}/dev",
+      publicPath: `http://localhost:${devServerPort}/dev`,
     }
   } else {
     throw new Error("Unknown environment");
@@ -88,8 +89,16 @@ function moduleConfig(env) {
     loaders: [
       {
         test: /\.tsx?$/,
-        exclude: /node_modules|features/,
+        exclude: [
+          /backend/,
+          /node_modules/,
+          /spec.ts/,
+          /features/,
+        ],
         loader: "awesome-typescript-loader",
+        query: {
+          configFileName: "./frontend/tsconfig.json",
+        }
       },
       {
         test: /\.css$/,
@@ -104,7 +113,7 @@ function moduleConfig(env) {
         loader: "url-loader",
         query: {
           limit: 10000,
-          name: path.join(config.assetsSubDirectory, "img/[name].[hash:7].[ext]"),
+          name: path.join("static", "img/[name].[hash:7].[ext]"),
         },
       },
       {
@@ -121,18 +130,26 @@ function moduleConfig(env) {
 function pluginsConfig(env) {
   if (env === "production") {
     return [
+      new TsConfigPathsPlugin({
+        tsconfig: "frontend/tsconfig.json",
+        compiler: "typescript",
+      }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": "\"production\"",
       }),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new HtmlWebpackPlugin({
         filename: "index.html",
-        template: "frontend/index.html",
+        template: "frontend/entry/index.html",
         inject: true,
       }),
     ];
-  } else (env === "development") {
+  } else if (env === "development") {
     return [
+      new TsConfigPathsPlugin({
+        tsconfig: "frontend/tsconfig.json",
+        compiler: "typescript",
+      }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": "\"development\"",
       }),
@@ -141,7 +158,7 @@ function pluginsConfig(env) {
       new webpack.NoEmitOnErrorsPlugin(),
       new HtmlWebpackPlugin({
         filename: "index.html",
-        template: "frontend/index.html",
+        template: "frontend/entry/index.html",
         inject: true,
       }),
       new FriendlyErrors(),
