@@ -92,7 +92,7 @@ function moduleConfig(env) {
         exclude: [
           /backend/,
           /node_modules/,
-          /spec.ts/,
+          /.*\.spec.tsx?/,
           /features/,
         ],
         loader: "awesome-typescript-loader",

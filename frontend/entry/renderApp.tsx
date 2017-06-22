@@ -5,7 +5,7 @@ import * as ReactDOM from "react-dom";
 
 // const appState = {};
 
-function App() {
+export function App() {
   // <Provider appState={appState}>
   //   <Router history={browserHistory}>
   //     <Route path="/" component={App}>
