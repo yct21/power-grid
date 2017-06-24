@@ -9,8 +9,8 @@ export const Devtool: React.SFC<{}> = () => {
       logEnabled: true,
     });
 
-    return <DevTools />
+    return <DevTools />;
   } else {
-    return <h1>meow</h1>
+    return <div />;
   }
 }

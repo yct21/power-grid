@@ -1,17 +1,8 @@
 import { HomePageStore } from "stores/homePageStore";
+import { StartupTempStore, createStartupTempStore } from "stores/startupTempStore";
 
-export type Store = HomePageStore;
+export type Store = StartupTempStore | HomePageStore;
 
-function createStore(currentGameId: string): void;
-function createStore(currentGameId: void): HomePageStore;
-function createStore(currentGameId: string | void): HomePageStore | void {
-  if (typeof(currentGameId) !== "string") {
-    return {
-      joinGameId: "1"
-    };
-  }
+export function createStore(): Store {
+  return createStartupTempStore();
 }
-
-export {
-  createStore,
-};
