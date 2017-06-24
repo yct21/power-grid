@@ -39,6 +39,6 @@
   "scripts": {
     "dev:server": "node config/devServer.js",
     "test:frontend-unit": "jest --config config/jest.frontend.json",
-    "test:frontend-unit-watch": "jest --watch --config config/jest.frontend.json"
+    "test:frontend-unit-watch": "jest --watch --config config/jest.frontend.json --notify"
   }
 }
