@@ -1,3 +1,12 @@
 export interface HomePageStore {
-  joinGameId: number
+  storeName: "HomePageStore",
+  // gameRooms
+  //
+}
+
+export function createHomePageStore(): HomePageStore {
+  return {
+    storeName: "HomePageStore",
+
+  }
 }

@@ -1,3 +1,5 @@
-import renderApp from "./renderApp";
+import renderApp from "entry/renderApp";
 
-renderApp();
+const appState = {joinGameId: "1"};
+
+renderApp(appState);

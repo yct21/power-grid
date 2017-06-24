@@ -1,24 +1,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-// import {Provider} from "mobx-react";
-// import {Router, Route, IndexRoute, browserHistory} from "react-router";
+import {Provider, observer, inject} from "mobx-react";
 
-// const appState = {};
+import { Store } from "stores";
 
-export function App() {
-  // <Provider appState={appState}>
-  //   <Router history={browserHistory}>
-  //     <Route path="/" component={App}>
-  //       <IndexRoute component={Empty} />
-  //     </Route>
-  //   </Router>
-  // </Provider>
-  return <h1>Hello world</h1>
+@inject("appState") @observer
+class App extends React.Component<{appState?: Store}, {}> {
+
+  render() {
+    return (
+        <h1>!!Hello world </h1>
+    );
+  }
 };
 
-export default function renderApp() {
+export default function renderApp(appState: Store) {
   ReactDOM.render(
-    <App />,
+    <Provider appState={appState}>
+      <App />
+    </Provider>,
     document.getElementById("app"),
   );
 }
