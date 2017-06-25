@@ -11,3 +11,7 @@ tsConfigPaths.register({
   baseUrl,
   paths: [],
 });
+
+global.document = {
+  getElementById: function() {},
+};
