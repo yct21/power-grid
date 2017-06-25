@@ -1,7 +1,18 @@
-import renderApp from "entry/renderApp";
-import { createStore } from "stores";
-import { observable } from "mobx";
+// import renderApp from "entry/renderApp";
+const { createStore } = require("stores");
 
-const appState = observable(createStore());
+// This is the entry of frontend part.
+// We should start up our application here.
+// Including
+// - Set up a temperory state
+// - Render a temperory page
+// - Connect websocket
 
-renderApp(appState);
+// state part
+const appState = createStore();
+console.log(appState);
+
+// rendering part
+// renderApp(appState);
+
+// socket.io part

@@ -7,6 +7,5 @@ export interface HomePageStore {
 export function createHomePageStore(): HomePageStore {
   return {
     storeName: "HomePageStore",
-
   }
 }
