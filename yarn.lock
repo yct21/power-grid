@@ -191,7 +191,7 @@ ansi-styles@^3.0.0:
   dependencies:
     color-convert "^1.0.0"
 
-any-promise@^1.0.0:
+any-promise@^1.0.0, any-promise@^1.3.0:
   version "1.3.0"
   resolved "http://registry.npm.taobao.org/any-promise/download/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
 
@@ -1477,7 +1477,7 @@ diff@1.4.0:
   version "1.4.0"
   resolved "http://registry.npm.taobao.org/diff/download/diff-1.4.0.tgz#7f28d2eb9ee7b15a97efd89ce63dcfdaa3ccbabf"
 
-diff@^3.0.0, diff@^3.2.0:
+diff@^3.0.0, diff@^3.1.0, diff@^3.2.0:
   version "3.2.0"
   resolved "http://registry.npm.taobao.org/diff/download/diff-3.2.0.tgz#c9ce393a4b7cbd0b058a725c93df299027868ff9"
 
@@ -3491,6 +3491,10 @@ macaddress@^0.2.8:
   version "0.2.8"
   resolved "http://registry.npm.taobao.org/macaddress/download/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
 
+make-error@^1.1.1:
+  version "1.3.0"
+  resolved "http://registry.npm.taobao.org/make-error/download/make-error-1.3.0.tgz#52ad3a339ccf10ce62b4040b708fe707244b8b96"
+
 makeerror@1.0.x:
   version "1.0.11"
   resolved "http://registry.npm.taobao.org/makeerror/download/makeerror-1.0.11.tgz#e01a5c9109f2af79660e4e8b9587790184f5a96c"
@@ -5274,7 +5278,7 @@ source-map-loader@^0.2.1:
     loader-utils "~0.2.2"
     source-map "~0.1.33"
 
-source-map-support@^0.4.15, source-map-support@^0.4.2, source-map-support@^0.4.4:
+source-map-support@^0.4.0, source-map-support@^0.4.15, source-map-support@^0.4.2, source-map-support@^0.4.4:
   version "0.4.15"
   resolved "http://registry.npm.taobao.org/source-map-support/download/source-map-support-0.4.15.tgz#03202df65c06d2bd8c7ec2362a193056fef8d3b1"
   dependencies:
@@ -5711,6 +5715,36 @@ ts-loader@^2.0.3:
     loader-utils "^1.0.2"
     semver "^5.0.1"
 
+ts-node@^3.1.0:
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/ts-node/download/ts-node-3.1.0.tgz#a75ec5aeb48f3058b1b945dba765f1150ba88f8c"
+  dependencies:
+    arrify "^1.0.0"
+    chalk "^1.1.1"
+    diff "^3.1.0"
+    make-error "^1.1.1"
+    minimist "^1.2.0"
+    mkdirp "^0.5.1"
+    source-map-support "^0.4.0"
+    tsconfig "^6.0.0"
+    v8flags "^2.0.11"
+    yn "^2.0.0"
+
+tsconfig-paths@^2.2.0:
+  version "2.2.0"
+  resolved "http://registry.npm.taobao.org/tsconfig-paths/download/tsconfig-paths-2.2.0.tgz#c76ace7f2c454cd31ca6f72c33876dbae02000e8"
+  dependencies:
+    tsconfig "^5.0.3"
+
+tsconfig@^5.0.3:
+  version "5.0.3"
+  resolved "http://registry.npm.taobao.org/tsconfig/download/tsconfig-5.0.3.tgz#5f4278e701800967a8fc383fd19648878f2a6e3a"
+  dependencies:
+    any-promise "^1.3.0"
+    parse-json "^2.2.0"
+    strip-bom "^2.0.0"
+    strip-json-comments "^2.0.0"
+
 tsconfig@^6.0.0:
   version "6.0.0"
   resolved "http://registry.npm.taobao.org/tsconfig/download/tsconfig-6.0.0.tgz#6b0e8376003d7af1864f8df8f89dd0059ffcd032"
@@ -5920,6 +5954,10 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+user-home@^1.1.1:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/user-home/download/user-home-1.1.1.tgz#2b5be23a32b63a7c9deb8d0f28d485724a3df190"
+
 util-arity@^1.0.2:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/util-arity/download/util-arity-1.1.0.tgz#59d01af1fdb3fede0ac4e632b0ab5f6ce97c9330"
@@ -5953,6 +5991,12 @@ uuid@^2.0.1, uuid@^2.0.2:
 uuid@^3.0.0:
   version "3.1.0"
   resolved "http://registry.npm.taobao.org/uuid/download/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
+
+v8flags@^2.0.11:
+  version "2.1.1"
+  resolved "http://registry.npm.taobao.org/v8flags/download/v8flags-2.1.1.tgz#aab1a1fa30d45f88dd321148875ac02c0b55e5b4"
+  dependencies:
+    user-home "^1.1.1"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"
@@ -6387,3 +6431,7 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+yn@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/yn/download/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"

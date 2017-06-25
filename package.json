@@ -31,6 +31,8 @@
     "style-loader": "^0.18.2",
     "testdouble": "^3.2.0",
     "ts-jest": "^20.0.6",
+    "ts-node": "^3.1.0",
+    "tsconfig-paths": "^2.2.0",
     "typescript": "^2.3.4",
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
