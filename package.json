@@ -43,6 +43,6 @@
   "scripts": {
     "dev:server": "node config/devServer.js",
     "test:frontend-unit": "mocha --opts config/mocha.frontend.opts",
-    "test:frontend-unit-watch": "jest --watch --config config/jest.frontend.json --notify"
+    "test:frontend-unit-watch": "mocha --opts config/mocha.frontend.opts --watch --watch-extensions ts tsx"
   }
 }
