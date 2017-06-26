@@ -1,2 +1,5 @@
 --require config/mocha.frontend.setup.js
 --reporter dot
+
+frontend/**/*.spec.ts
+frontend/**/*.spec.tsx
