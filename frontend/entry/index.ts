@@ -1,4 +1,4 @@
-// import renderApp from "entry/renderApp";
+import renderApp from "entry/renderApp";
 const { createStore } = require("stores");
 
 // This is the entry of frontend part.
@@ -10,9 +10,8 @@ const { createStore } = require("stores");
 
 // state part
 const appState = createStore();
-console.log(appState);
 
 // rendering part
-// renderApp(appState);
+renderApp(appState);
 
 // socket.io part

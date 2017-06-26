@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom";
 import {Provider, observer, inject} from "mobx-react";
 
 import { Store } from "stores";
-import { modifyContent } from "stores/startupTempStore";
 import { Devtool } from "entry/devtool";
 
 @inject("appState") @observer
@@ -16,7 +15,6 @@ class App extends React.Component<{appState?: Store}, {}> {
       if (appState.storeName === "StartupTempStore") {
         return (
           <div>
-            <button onClick={(e) => modifyContent(appState)}>{appState.someContent}</button>
             <Devtool />
           </div>
         );
