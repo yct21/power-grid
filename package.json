@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
+    "@cycle/dom": "^17.5.0",
+    "@cycle/rxjs-run": "^7.0.0",
     "@types/node": "^8.0.2",
     "@types/react": "^15.0.31",
     "@types/react-dom": "^15.5.1",
@@ -11,7 +13,8 @@
     "mobx-react-devtools": "^4.2.15",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-router": "^4.1.1"
+    "react-router": "^4.1.1",
+    "rxjs": "^5.4.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
@@ -43,6 +46,6 @@
   "scripts": {
     "dev:server": "node config/devServer.js",
     "test:frontend-unit": "mocha --opts config/mocha.frontend.opts",
-    "test:frontend-unit-watch": "mocha --opts config/mocha.frontend.opts -G --watch --watch-extensions ts tsx"
+    "test:frontend-unit-watch": "mocha --opts config/mocha.frontend.opts -G --watch --watch-extensions ts"
   }
 }
