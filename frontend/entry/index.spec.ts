@@ -2,26 +2,30 @@ import * as td from "testdouble";
 
 describe("entry/index", () => {
   it("starts application correctly", () => {
-    // Given `createStore` is mocked
-    const fakeCreateStore = td.function("fake create store");
-    const fakeStore = "fakeStore";
-    td.when(fakeCreateStore()).thenReturn(fakeStore);
-    td.replace("stores/initialize", { createStore: fakeCreateStore });
+    // Given we have a MainComponent to render
+    const fakeMainComponent = "mainComponent";
+    td.replace("entry/MainComponent", { default: fakeMainComponent });
 
-    // And `renderApp` is mocked
-    const fakeRenderApp = td.function("fake renderApp");
-    td.replace("entry/renderApp", { default: fakeRenderApp });
+    // And we could make a DOMDriver of cycle.js
+    const dom = "dom";
+    const fakeMakeDomDriver = td.function("makeDomDriver");
+    td.when(fakeMakeDomDriver("#app")).thenReturn(dom);
+    td.replace("@cycle/dom", { makeDOMDriver: fakeMakeDomDriver });
 
-    // And ``
+    // And we can render the MainComponent by running it with driver
+    const fakeRun = td.function("run");
+    td.replace("@cycle/rxjs-run", { run: fakeRun });
 
-    // When App entry is loaded
+    // When application is started
     require("./index");
 
-    // Then it should set up a temperory store for loading
-    //// Unnecessary: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double
-    // td.verify(fakeCreateStore());
-
-    // And it should render a temperory page with this store
-    td.verify(fakeRenderApp(fakeStore));
+    // Then it should make a domdriver
+    // And initialize a store with this domdriver
+    // And call rxjs-run with maincomponent and this store
+    td.verify(fakeRun(
+      fakeMainComponent, {
+        DOM: dom,
+      }
+    ));
   })
 })

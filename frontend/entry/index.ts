@@ -1,14 +1,11 @@
+import { makeDOMDriver } from "@cycle/dom";
+import { run } from "@cycle/rxjs-run";
+import MainComponent  from "entry/MainComponent";
+
 // This is the entry of frontend part.
 // We should start up our application here.
-// Including
-// - Set up a temperory state
-// - Render a temperory page
-// - Connect websocket
 
-// state part
-// const appState = createStore();
-
-// rendering part
-// renderApp(appState);
-
-// socket.io part
+const dom = makeDOMDriver("#app");
+run(MainComponent, {
+  DOM: dom,
+})
