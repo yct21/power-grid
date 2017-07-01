@@ -1,6 +1,3 @@
-import renderApp from "entry/renderApp";
-const { createStore } = require("stores");
-
 // This is the entry of frontend part.
 // We should start up our application here.
 // Including
@@ -9,9 +6,9 @@ const { createStore } = require("stores");
 // - Connect websocket
 
 // state part
-const appState = createStore();
+// const appState = createStore();
 
 // rendering part
-renderApp(appState);
+// renderApp(appState);
 
 // socket.io part

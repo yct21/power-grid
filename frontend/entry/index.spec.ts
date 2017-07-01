@@ -6,11 +6,13 @@ describe("entry/index", () => {
     const fakeCreateStore = td.function("fake create store");
     const fakeStore = "fakeStore";
     td.when(fakeCreateStore()).thenReturn(fakeStore);
-    td.replace("stores", { createStore: fakeCreateStore });
+    td.replace("stores/initialize", { createStore: fakeCreateStore });
 
     // And `renderApp` is mocked
     const fakeRenderApp = td.function("fake renderApp");
     td.replace("entry/renderApp", { default: fakeRenderApp });
+
+    // And ``
 
     // When App entry is loaded
     require("./index");
