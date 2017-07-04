@@ -5927,7 +5927,7 @@ tslint-react@^3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/tslint-react/download/tslint-react-3.0.0.tgz#00c48ab7f22e91533b62bdef2c162b49447af00a"
 
-tslint@^5.2.0:
+tslint@^5.2.0, tslint@^5.4.3:
   version "5.4.3"
   resolved "http://registry.npm.taobao.org/tslint/download/tslint-5.4.3.tgz#761c8402b80e347b7733a04390a757b253580467"
   dependencies:
