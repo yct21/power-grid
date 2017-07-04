@@ -22,7 +22,7 @@
     "node_modules",
     "build",
     "config",
-    "**/*.spec.tsx?"
+    "**/*.spec.ts"
   ],
   "types": [
     "typePatches"
