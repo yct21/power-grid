@@ -1,5 +1,13 @@
 import * as td from "testdouble";
 
+/*
+  Although we are not supposed to mock things we don't own,
+  like @cycle/rxjs-run or @cycle/dom.
+
+  But since they are the most basic APIs of cycle.js I'm not going to wrap
+  them up like they did it in textbook for the quality of life.
+  Checking wether the whole App has being rendered is left to feature tests.
+  */
 describe("entry/index", () => {
   it("starts application correctly", () => {
     // Given we have a MainComponent to render
@@ -21,7 +29,7 @@ describe("entry/index", () => {
 
     // Then it should make a domdriver
     // And initialize a store with this domdriver
-    // And call rxjs-run with maincomponent and this store
+    // And call rxjs-run with MainComponent and this store
     td.verify(fakeRun(
       fakeMainComponent, {
         DOM: dom,
