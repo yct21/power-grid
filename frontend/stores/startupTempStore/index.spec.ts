@@ -1,18 +1,12 @@
-// import { isObservable } from "mobx";
-// import { createStartupTempStore } from "./index";
+import { assert } from "chai";
 
-// describe("stores/startupTempStore", () => {
-//   it("We could initialize a startupTempStore", () => {
-//     // no given
-//     // when createStartupTempStore is called
-//     const store = createStartupTempStore();
+describe("stores/startupTempstore/index", () => {
+  it("could create a temporary store when application starts", () => {
+    // When creating startupTempStore
+    const { createStartupTempStore } = require("./index");
+    const store$ = createStartupTempStore();
 
-//     // then it return a expected value
-//     expect(store).toEqual({
-//       storeName: "StartupTempStore",
-//     });
-
-//     // and it is converted to a Mobx observable
-//     expect(isObservable(store)).toBeTruthy();
-//   });
-// })
+    // Then it should create a BehaviorSubject with simple plain value
+    assert.deepEqual(store$.getValue(), { storeName: "StartupTempStore" });
+  });
+});
