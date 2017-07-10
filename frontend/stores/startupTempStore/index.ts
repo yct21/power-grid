@@ -1,8 +1,9 @@
-// We are only expecting connected event when application started.
 export interface StartupTempStore {
   storeName: "StartupTempStore",
 }
 
+// It returns plain js object instead of a Observable,
+// since it is only used to be the initial value of store.
 export function createStartupTempStore(): StartupTempStore {
   const initialValue: StartupTempStore = { storeName: "StartupTempStore" };
 
