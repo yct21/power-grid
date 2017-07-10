@@ -1,10 +1,7 @@
 import { DOMSource } from "@cycle/dom/rxjs-typings";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/of"
-
-export interface GamePageStore {
-  storeName: "GamePageStore";
-}
+import { GamePageStore } from "store/types";
 
 export function createGamePageStore(domSource: DOMSource, socket: SocketIOClient.Socket) {
   const initialValue: GamePageStore = {
