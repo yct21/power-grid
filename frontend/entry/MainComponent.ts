@@ -1,5 +1,5 @@
 import { Sources } from "@cycle/run";
-import { createStore } from "stores";
+import { createStore } from "store";
 import Router from "router";
 
 // Initialize store and render router

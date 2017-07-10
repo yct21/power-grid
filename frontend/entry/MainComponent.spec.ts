@@ -9,7 +9,7 @@ describe("entry/MainComponent", () => {
     const fakeStore = "fakeStore";
     const fakeCreateStore = td.function("createStore");
     td.when(fakeCreateStore(fakeDomSource)).thenReturn(fakeStore);
-    td.replace("stores", { createStore: fakeCreateStore });
+    td.replace("store", { createStore: fakeCreateStore });
 
     // And we have a router component
     const fakeRouterComponent = td.function("fakeRouterComponent");

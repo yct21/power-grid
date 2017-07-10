@@ -5,13 +5,12 @@ import "rxjs/add/operator/filter";
 import "rxjs/add/operator/switchMap";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { DOMSource } from "@cycle/dom/rxjs-typings";
-import { StartupTempStore, createStartupTempStore } from "stores/startupTempStore";
-import { LandingPageStore, createLandingPageStore } from "stores/landingPageStore";
-import { GamePageStore, createGamePageStore } from "stores/gamePageStore";
+import { createStartupTempStore } from "store/startupTempStore";
+import { createLandingPageStore } from "store/landingPageStore";
+import { createGamePageStore } from "store/gamePageStore";
 import { getSocket } from "socket";
-import { SwitchStoreEvents, intent } from "stores/intent";
-
-export type Store = StartupTempStore | LandingPageStore | GamePageStore;
+import { SwitchStoreEvents, intent } from "store/intent";
+import { Store } from "store/types";
 
 /*
      +--------------------+
