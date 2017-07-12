@@ -1,17 +1,43 @@
 import * as td from "testdouble";
 import { assert } from "chai";
 import { TestScheduler } from "rxjs/testing/TestScheduler";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Store } from "./types";
 
-function mockCreateStartupTempStore() {
-  const fakeCreateStartupTempStore = td.function("fakeCreateStartupTempStore");
-  const fakeStore = "fakeStore";
-  td.when(fakeCreateStartupTempStore()).thenReturn(fakeStore);
-  td.replace("stores/startupTempStore", { createStartupTempStore: fakeCreateStartupTempStore });
+// Some helper functions
 
-  return fakeCreateStartupTempStore;
+function mockCreateStore(domSource: string, socket: string, scheduler: TestScheduler): void {
+  // mock landingPageStore
+  const fakeCreateLandingPageStore = (domSource: string, socket: string) => {
+    return scheduler.createColdObservable("xxxxxxxxxxxxxxxxxx", {
+      x: {
+        storeName: "LandingPageStore",
+      }
+    });
+  }
+  td.replace("store/landingPageStore", { createLandingPageStore: fakeCreateLandingPageStore });
+
+  // mock gamePageStore
+  const fakeCreateGamePageStore = (domSource: string, socket: string) => {
+    return scheduler.createColdObservable("xxxxxxxxxxxxxxxxxx", {
+      x: {
+        storeName: "GamePageStore",
+      }
+    });
+  }
+  td.replace("store/gamePageStore", { createGamePageStore: fakeCreateGamePageStore });
 }
 
-interface EventMarbles {
+function mockSocket() {
+  const fakeSocket = "fakeSocket";
+  const fakeGetSocket = td.function("fakeGetSocket");
+  td.when(fakeGetSocket()).thenReturn(fakeSocket);
+  td.replace("socket", { getSocket: fakeGetSocket });
+
+  return fakeSocket;
+}
+
+type EventMarbles = {
   connectSocketMarble: string,
   enterGameMarble: string,
   exitGameMarble: string,
@@ -24,56 +50,64 @@ function mockIntent(
   const { connectSocketMarble, enterGameMarble, exitGameMarble } = eventMarbles;
   const connectSocket$ = scheduler.createColdObservable(
     connectSocketMarble,
-    { a: { eventName: "connect_socket" }},
+    { x: { event: "connect_socket" }},
   );
 
-  const enterGameSocket$ = scheduler.createColdObservable(
+  const enterGame$ = scheduler.createColdObservable(
     enterGameMarble,
-    { b: { eventName: "enter_game" } },
+    { x: { event: "enter_game" } },
   );
 
-  const exitGameSocket$ = scheduler.createColdObservable(
+  const exitGame$ = scheduler.createColdObservable(
     exitGameMarble,
-    { c: { eventName: "exit_game" } },
+    { x: { event: "exit_game" } },
   )
 
-  const fakeIntent = td.function();
+  const fakeIntent = td.function("fakeIntent");
   td.when(fakeIntent("fakeDomSource", "fakeSocket")).thenReturn({
     connectSocket$,
-    enterGameSocket$,
-    exitGameSocket$
+    enterGame$,
+    exitGame$
   });
 
-  td.replace("stores/intent", { intent: fakeIntent });
+  td.replace("store/intent", { intent: fakeIntent });
 }
 
-function expectStore(scheduler: TestScheduler, store: Store, marble: string) {
-  scheduler.expectObservable()
+function expectStore(scheduler: TestScheduler, store$: BehaviorSubject<Store>, marble: string) {
+  scheduler.expectObservable(store$).toBe(marble, {
+    l: { storeName: "StartupTempStore" },
+    m: { storeName: "LandingPageStore" },
+    n: { storeName: "GamePageStore" },
+  });
 }
 
 describe("frontend/stores", () => {
   describe("Feature: create store stream as the model of application", () => {
     it("Scenario: store switches normally", () => {
-      // Given we can create a StartupTempStore
-      mockCreateStartupTempStore();
-
-      // And DOMSource is provided
+      // Given a DOMSource as parameter
       const fakeDomSource = "fakeDomSource";
 
-      // And we have streams for switching store
+      // And a function to get socket object
+      const socket = mockSocket();
+
+      // And store initializers
       const scheduler = new TestScheduler(assert.deepEqual);
+      mockCreateStore(fakeDomSource, socket, scheduler);
+
+      // And we have streams for switching store
       mockIntent(scheduler, {
-        connectSocketMarble: "-x^",
-        enterGameMarble:     "--x-",
-        exitGameMarble:      "---x--",
+        connectSocketMarble: "--x----------",
+        enterGameMarble:     "------x------",
+        exitGameMarble:      "----------x--",
       })
+      const expected =       "l-mmmmnnnnmmmmmmmmmmmmmmmmmm"; // frame 2 won't emit since it's still a BehaviorSubject
 
       // When createStore is called
       const { createStore } = require("./index");
       const store$ = createStore(fakeDomSource);
 
       // Then it returns a StartupTempStore
-      scheduler.expectObservable(store$).toBe("x-", {x: fakeStore});
+      expectStore(scheduler, store$, expected)
       scheduler.flush();
     });
   })
