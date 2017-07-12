@@ -4,6 +4,14 @@ import { TestScheduler } from "rxjs/testing/TestScheduler";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Store } from "./types";
 
+/*
+  OK this is complicate since we have to many dependencies to be mocked:
+
+  - 3 createStore functions
+  - getSocket
+  - intent
+  */
+
 // Some helper functions
 
 function mockCreateStore(domSource: string, socket: string, scheduler: TestScheduler): void {
@@ -81,6 +89,8 @@ function expectStore(scheduler: TestScheduler, store$: BehaviorSubject<Store>, m
   });
 }
 
+// The real tests
+
 describe("frontend/stores", () => {
   describe("Feature: create store stream as the model of application", () => {
     it("Scenario: store switches normally", () => {
@@ -100,15 +110,45 @@ describe("frontend/stores", () => {
         enterGameMarble:     "------x------",
         exitGameMarble:      "----------x--",
       })
-      const expected =       "l-mmmmnnnnmmmmmmmmmmmmmmmmmm"; // frame 2 won't emit since it's still a BehaviorSubject
 
       // When createStore is called
       const { createStore } = require("./index");
       const store$ = createStore(fakeDomSource);
 
-      // Then it returns a StartupTempStore
+      // Then it returns a store that emits value as expected;
+      const expected =       "l-mmmmnnnnmmmmmmmmmmmmmmmmmm"; // frame 2 won't emit since it's still a BehaviorSubject
+
       expectStore(scheduler, store$, expected)
       scheduler.flush();
     });
+
+    it("Scenario: store switch without order", () => {
+      // Given a DOMSource as parameter
+      const fakeDomSource = "fakeDomSource";
+
+      // And a function to get socket object
+      const socket = mockSocket();
+
+      // And store initializers
+      const scheduler = new TestScheduler(assert.deepEqual);
+      mockCreateStore(fakeDomSource, socket, scheduler);
+
+      // And we have streams for switching store, which order is wrong
+      mockIntent(scheduler, {
+        connectSocketMarble: "-------------",
+        enterGameMarble:     "xxxxxx-------",
+        exitGameMarble:      "------xxxxxxx",
+      })
+
+      // When createStore is called
+      const { createStore } = require("./index");
+      const store$ = createStore(fakeDomSource);
+
+      // Then it won't subscribe to other streams at all
+      const expected =       "l-------";
+
+      expectStore(scheduler, store$, expected)
+      scheduler.flush();
+    })
   })
 });
