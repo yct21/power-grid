@@ -15,3 +15,5 @@ tsConfigPaths.register({
 global.document = {
   getElementById: function() {},
 };
+
+global.test = global.it
