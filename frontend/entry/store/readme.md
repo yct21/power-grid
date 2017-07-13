@@ -1,4 +1,4 @@
-# frontend/stores
+# frontend/entry/store
 
 This is stores, which describe the application state.
 
