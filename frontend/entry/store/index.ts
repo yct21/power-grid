@@ -6,11 +6,11 @@ import "rxjs/add/operator/switchMap";
 import "rxjs/add/operator/do";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { DOMSource } from "@cycle/dom/rxjs-typings";
-import { StartupTempStore, createStartupTempStore } from "store/startupTempStore";
-import { LandingPageStore, createLandingPageStore } from "store/landingPageStore";
-import { GamePageStore, createGamePageStore } from "store/gamePageStore";
+import { StartupTempStore, createStartupTempStore } from "StartupTempPage/store";
+import { LandingPageStore, createLandingPageStore } from "LandingPage/store";
+import { GamePageStore, createGamePageStore } from "GamePage/store";
 import { getSocket } from "socket";
-import { SwitchStoreEvents, intent } from "store/intent";
+import { SwitchStoreEvents, intent } from "entry/store/intent";
 
 export type Store = StartupTempStore | LandingPageStore | GamePageStore;
 

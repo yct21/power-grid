@@ -9,7 +9,7 @@ describe("entry/MainComponent", () => {
     const fakeStore = "fakeStore";
     const fakeCreateStore = td.function("createStore");
     td.when(fakeCreateStore(fakeDomSource)).thenReturn(fakeStore);
-    td.replace("store", { createStore: fakeCreateStore });
+    td.replace("entry/store", { createStore: fakeCreateStore });
 
     // And we have a router component
     const fakeRouterComponent = td.function("fakeRouterComponent");
@@ -19,7 +19,7 @@ describe("entry/MainComponent", () => {
     td.replace("router", { default: fakeRouterComponent });
 
     // When we render MainComponent
-    const MainComponent = require("./MainComponent").default;
+    const MainComponent = require("./index").default;
     const renderedMainComponent = MainComponent({ DOM: fakeDomSource });
 
     // Then it create a store with current domSource

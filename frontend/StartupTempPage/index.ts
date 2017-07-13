@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { DOMSource, h3 } from "@cycle/dom";
-import { StartupTempStore } from "store/startupTempStore";
+import { StartupTempStore } from "StartupTempPage/store";
 
 interface PageParameter {
   props: Observable<StartupTempStore>,

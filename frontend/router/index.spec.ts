@@ -30,7 +30,7 @@ describe("router/index", () => {
           DOM: fakeStartupTempPageDom,
         }
       );
-      td.replace("pages/StartupTempPage", { default: fakeStartupTempPage });
+      td.replace("StartupTempPage", { default: fakeStartupTempPage });
 
       // When rendering router
       const Router = require("./index").default;
@@ -69,7 +69,7 @@ describe("router/index", () => {
       ).thenReturn({
         DOM: fakeLandingPageDom,
       });
-      td.replace("pages/LandingPage", { default: fakeLandingPage });
+      td.replace("LandingPage", { default: fakeLandingPage });
 
       // When rendering router
       const Router = require("./index").default;

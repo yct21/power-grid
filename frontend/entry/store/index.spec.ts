@@ -23,7 +23,7 @@ function mockCreateStore(domSource: string, socket: string, scheduler: TestSched
       }
     });
   }
-  td.replace("store/landingPageStore", { createLandingPageStore: fakeCreateLandingPageStore });
+  td.replace("LandingPage/store", { createLandingPageStore: fakeCreateLandingPageStore });
 
   // mock gamePageStore
   const fakeCreateGamePageStore = (domSource: string, socket: string) => {
@@ -33,7 +33,7 @@ function mockCreateStore(domSource: string, socket: string, scheduler: TestSched
       }
     });
   }
-  td.replace("store/gamePageStore", { createGamePageStore: fakeCreateGamePageStore });
+  td.replace("GamePage/store", { createGamePageStore: fakeCreateGamePageStore });
 }
 
 function mockSocket() {
@@ -78,7 +78,7 @@ function mockIntent(
     exitGame$
   });
 
-  td.replace("store/intent", { intent: fakeIntent });
+  td.replace("entry/store/intent", { intent: fakeIntent });
 }
 
 function expectStore(scheduler: TestScheduler, store$: BehaviorSubject<Store>, marble: string) {

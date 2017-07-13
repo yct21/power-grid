@@ -1,5 +1,5 @@
 import { Observable } from "rxjs/Observable";
-import { LandingPageStore } from "store/landingPageStore";
+import { LandingPageStore } from "LandingPage/store";
 import { DOMSource, h3 } from "@cycle/dom";
 
 interface PageParameter {

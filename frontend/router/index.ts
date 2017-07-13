@@ -1,4 +1,4 @@
-import { Store } from "store";
+import { Store } from "entry/store";
 import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
 import { DOMSource } from "@cycle/dom";
