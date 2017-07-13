@@ -2,8 +2,8 @@ import { Store } from "store";
 import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
 import { DOMSource } from "@cycle/dom";
-import StartupTempPage from "pages/StartupTempPage";
-import LandingPage from "pages/LandingPage";
+import StartupTempPage from "StartupTempPage";
+import LandingPage from "LandingPage";
 
 interface RouterParameter {
   props: Observable<Store>,
