@@ -7,3 +7,9 @@ export function getSocket() {
 
   return socket;
 }
+
+export function onConnect(socket: SocketIOClient.Socket, handler: () => void) {
+  socket.on("connect", () => {
+    handler();
+  });
+}
