@@ -2,7 +2,7 @@ import * as td from "testdouble";
 import { assert } from "chai";
 import { TestScheduler } from "rxjs/testing/TestScheduler";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Store } from "./types";
+import { Store } from "./index";
 
 /*
   OK this is complicate since we have to many dependencies to be mocked:
