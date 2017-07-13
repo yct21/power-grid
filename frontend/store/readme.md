@@ -8,3 +8,23 @@ And since it's a cycle.js program, it's actually in the form of
 
 We are just emit plain javascript objects in the stream for the simplicity,
 and may switch to Immutable.js if it gets too slow to render, in the future.
+
+## Switching between stores
+
+```
+     +--------------------+
+     |  StartupTempStore  |
+     +--------------------+
+                |
+                | Connect socket
+                v
+     +--------------------+
+     |  LandingPageStore  |
+     +------|-------------+
+            |        ^
+Enter game  |        |  Exit game
+            v        |
+     +--------------------+
+     |   GamePageStore    |
+     +--------------------+
+```
