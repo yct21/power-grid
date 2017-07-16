@@ -102,7 +102,18 @@ function moduleConfig(env) {
       },
       {
         test: /\.css$/,
-        loader: ["style-loader", "postcss-loader"],
+        loader: [
+          "style-loader",
+          { loader: "css-loader",
+            options: {
+              modules: true,
+              importLoader: 1,
+              camelCase: true,
+              localIdentName: "[name]__[local]___[hash:base64:5]",
+            }
+          },
+          { loader: "postcss-loader", options: { config: { path: "./config/postcss.config.js" }}},
+        ],
       },
       {
         test: /\.json$/,
