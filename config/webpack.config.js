@@ -26,11 +26,19 @@ function entryConfig(env) {
   if (env === "production") {
     return [
       entryFile,
+      path.posix.resolve(
+        projectRoot,
+        "node_modules/material-components-web/dist/material-components-web.css",
+      ),
     ];
   } else if (env === "development") {
     return [
       entryFile,
       webpackHotMiddlewareEntry,
+      path.posix.resolve(
+        projectRoot,
+        "node_modules/material-components-web/dist/material-components-web.css",
+      ),
     ];
   } else {
     throw new Error("Unknown environment");
@@ -102,6 +110,7 @@ function moduleConfig(env) {
       },
       {
         test: /\.css$/,
+        exclude: [ /node_modules/ ],
         loader: [
           "style-loader",
           { loader: "css-loader",
@@ -114,6 +123,11 @@ function moduleConfig(env) {
           },
           { loader: "postcss-loader", options: { config: { path: "./config/postcss.config.js" }}},
         ],
+      },
+      {
+        test: /\.css$/,
+        include: [ /node_modules/ ],
+        loader: [ "style-loader", "css-loader" ],
       },
       {
         test: /\.json$/,
