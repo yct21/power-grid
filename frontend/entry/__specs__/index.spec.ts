@@ -25,7 +25,7 @@ describe("entry/index", () => {
     td.replace("@cycle/rxjs-run", { run: fakeRun });
 
     // When application is started
-    require("./index");
+    require("../index");
 
     // Then it should make a domdriver
     // And initialize a store with this domdriver

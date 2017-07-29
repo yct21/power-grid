@@ -13,10 +13,14 @@ app.use((req: any, res: any, next: any) => {
   next();
 });
 
-io.on('connection', function (socket) {
-  console.log("test")
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+io.on("connection", function (socket) {
+  console.log(socket.id);
+
+  // const interval = setInterval(() => { socket.emit("switchPage", { onlineNum: 1 })}, 3000 );
+  // socket.on("disconnect", () => {
+  //   clearInterval(interval);
+  // });
+  // socket.on("waitingForRouting", () => {
+  socket.emit("switchPage", { onlineNum: 1 });
+  // });
 });

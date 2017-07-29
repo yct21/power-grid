@@ -1,13 +1,28 @@
-import { DOMSource } from "@cycle/dom/rxjs-typings";
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/of";
+import "rxjs/add/operator/startWith";
+import { refreshOnlineNum$ } from "socket/refreshOnlineNum";
+import { NetworkStatus, networkStatus$ } from "socket/networkStatus";
 
-export interface LandingPageStore {
-  storeName: "LandingPageStore",
+interface StoreProps {
+  onlineNum$: Observable<number>,
+  networkStatus$: Observable<NetworkStatus>,
 }
 
-export function createLandingPageStore(domSource: DOMSource, socket: SocketIOClient.Socket) {
-  const store: LandingPageStore = { storeName: "LandingPageStore" };
+export interface StoreInitialParameters {
+  onlineNum: number,
+}
 
-  return Observable.of(store);
+export interface Store {
+  props: StoreProps,
+}
+
+export function createStore(initialParameters: StoreInitialParameters) {
+  const props: StoreProps = {
+    onlineNum$: refreshOnlineNum$().startWith(initialParameters.onlineNum),
+    networkStatus$: networkStatus$(),
+  };
+
+  return {
+    props,
+  }
 }

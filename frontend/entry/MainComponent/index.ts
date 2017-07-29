@@ -1,13 +1,17 @@
-import { Sources } from "@cycle/run";
-import { createStore } from "entry/store";
-import Router from "router";
+import { DOMSource } from "@cycle/dom";
+import "rxjs/add/operator/switchMap";
+import { switchPage$ } from "socket/switchPage";
+import LandingPage from "LandingPage";
+import { StoreInitialParameters as LandingPageInitialParameters } from "LandingPage/store";
 
-// Initialize store and render router
-export default function MainComponent(sources: Sources) {
-  const domSource = sources.DOM;
-  const store$ = createStore(domSource);
+// This is actully a router
+export default function MainComponent({DOM: domSource}: {DOM: DOMSource}) {
+  const view$ = switchPage$().switchMap((parameter: LandingPageInitialParameters) => {
+    console.log(parameter)
+    const page = LandingPage({ storeInitialParameters: parameter, DOM: domSource });
 
-  const router = Router({ DOM: domSource, props: store$ });
+    return page.DOM;
+  });
 
-  return { DOM: router.DOM };
+  return { DOM: view$ };
 }
