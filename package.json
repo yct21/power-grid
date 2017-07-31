@@ -33,6 +33,7 @@
     "mocha": "^3.4.2",
     "nightwatch": "^0.9.16",
     "nightwatch-cucumber": "^7.1.9",
+    "postcss-icss-values": "^2.0.1",
     "postcss-loader": "^2.0.6",
     "postcss-smart-import": "^0.7.5",
     "precss": "^2.0.0",

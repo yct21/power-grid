@@ -2416,6 +2416,12 @@ icss-utils@^2.1.0:
   dependencies:
     postcss "^6.0.1"
 
+icss-utils@^3.0.1:
+  version "3.0.1"
+  resolved "http://registry.npm.taobao.org/icss-utils/download/icss-utils-3.0.1.tgz#ee70d3ae8cac38c6be5ed91e851b27eed343ad0f"
+  dependencies:
+    postcss "^6.0.2"
+
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "http://registry.npm.taobao.org/ieee754/download/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
@@ -3767,6 +3773,15 @@ postcss-filter-plugins@^2.0.0:
   dependencies:
     postcss "^5.0.4"
     uniqid "^4.0.0"
+
+postcss-icss-values@^2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/postcss-icss-values/download/postcss-icss-values-2.0.1.tgz#5a3388b759986ed25aa1c1c06836584b2b32780f"
+  dependencies:
+    icss-utils "^3.0.1"
+    lodash "^4.17.4"
+    postcss "^6.0.2"
+    postcss-value-parser "^3.3.0"
 
 postcss-import@^10.0.0:
   version "10.0.0"

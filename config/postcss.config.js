@@ -3,5 +3,6 @@ module.exports = {
     require("postcss-smart-import")({ /* ...options */ }),
     require("precss")({ /* ...options */ }),
     require("autoprefixer")({ /* ...options */ }),
+    require('postcss-icss-values'),
   ],
 };
