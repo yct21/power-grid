@@ -1,3 +1,4 @@
 .landing-page {
-  background-color: #aaa;
+  display: flex;
+  flex-direction: column;
 }
