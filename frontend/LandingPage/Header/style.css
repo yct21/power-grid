@@ -1,0 +1,25 @@
+@value dark-primary-color, primary-color from "../../entry/styles/common.css";
+@value header-height 42px;
+@value header-margin 7%;
+
+.header {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid dark-primary-color;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  flex: header-height;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    margin: 0 header-margin 0 header-margin;
+
+    .title {
+      color: dark-primary-color;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  }
+}

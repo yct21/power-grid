@@ -26,6 +26,10 @@ function entryConfig(env) {
   if (env === "production") {
     return [
       entryFile,
+      path.posix.resolve(
+        projectRoot,
+        "node_modules/material-components-web/dist/material-components-web.css",
+      ),
     ];
   } else if (env === "development") {
     return [
@@ -102,7 +106,24 @@ function moduleConfig(env) {
       },
       {
         test: /\.css$/,
-        loader: ["style-loader", "css-loader"],
+        exclude: [ /node_modules/ ],
+        loader: [
+          "style-loader",
+          { loader: "css-loader",
+            options: {
+              modules: true,
+              importLoader: 1,
+              camelCase: true,
+              localIdentName: "[name]__[local]___[hash:base64:5]",
+            }
+          },
+          { loader: "postcss-loader", options: { config: { path: "./config/postcss.config.js" }}},
+        ],
+      },
+      {
+        test: /\.css$/,
+        include: [ /node_modules/ ],
+        loader: [ "style-loader", "css-loader" ],
       },
       {
         test: /\.json$/,
