@@ -3,7 +3,7 @@ import { assert } from "chai";
 import * as td from "testdouble";
 
 describe("LandingPage/store", () => {
-  describe("Feature: it could create store with proper parameter", () => {
+  it("Feature: it could create store with proper parameter", () => {
     const scheduler = new TestScheduler(assert.deepEqual);
 
     // Given store has onlineNum as initial parameter
