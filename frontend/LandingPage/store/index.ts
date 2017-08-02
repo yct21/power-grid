@@ -6,9 +6,10 @@ import { NetworkStatus, networkStatus$ } from "socket/networkStatus";
 interface StoreProps {
   onlineNum$: Observable<number>,
   networkStatus$: Observable<NetworkStatus>,
+
 }
 
-export interface StoreInitialParameters {
+export interface InitialParams {
   onlineNum: number,
 }
 
@@ -16,9 +17,9 @@ export interface Store {
   props: StoreProps,
 }
 
-export function createStore(initialParameters: StoreInitialParameters) {
+export function createStore(initialParams: InitialParams) {
   const props: StoreProps = {
-    onlineNum$: refreshOnlineNum$().startWith(initialParameters.onlineNum),
+    onlineNum$: refreshOnlineNum$().startWith(initialParams.onlineNum),
     networkStatus$: networkStatus$(),
   };
 
