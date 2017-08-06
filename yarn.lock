@@ -285,6 +285,10 @@
   version "4.6.0"
   resolved "http://registry.npm.taobao.org/@types/history/download/@types/history-4.6.0.tgz#093d67ed780d889c9543f6dca24ebee0b6b9fc45"
 
+"@types/js-cookie@^2.0.28":
+  version "2.0.28"
+  resolved "http://registry.npm.taobao.org/@types/js-cookie/download/@types/js-cookie-2.0.28.tgz#d6a9136d699257970fc74d899cd7b12a608d14da"
+
 "@types/lodash-es@^4.14.5":
   version "4.14.5"
   resolved "http://registry.npm.taobao.org/@types/lodash-es/download/@types/lodash-es-4.14.5.tgz#57c11845eaf6a7d2a9095e9533fed4980f3d5784"
@@ -338,6 +342,12 @@
 "@types/socket.io@^1.4.29":
   version "1.4.29"
   resolved "http://registry.npm.taobao.org/@types/socket.io/download/@types/socket.io-1.4.29.tgz#86a6b3a9ab78cf9a900ceef85b9b68b6bea86712"
+  dependencies:
+    "@types/node" "*"
+
+"@types/uuid@^3.4.0":
+  version "3.4.0"
+  resolved "http://registry.npm.taobao.org/@types/uuid/download/@types/uuid-3.4.0.tgz#91639516fbb892ed3737a2bdc1b030d02b4a09c1"
   dependencies:
     "@types/node" "*"
 
@@ -2698,6 +2708,10 @@ javascript-natural-sort@0.7.1:
 js-base64@^2.1.9:
   version "2.1.9"
   resolved "http://registry.npm.taobao.org/js-base64/download/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
+
+js-cookie@^2.1.4:
+  version "2.1.4"
+  resolved "http://registry.npm.taobao.org/js-cookie/download/js-cookie-2.1.4.tgz#da4ec503866f149d164cf25f579ef31015025d8d"
 
 js-tokens@^3.0.0:
   version "3.0.2"
@@ -5358,7 +5372,7 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/utils-merge/download/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
-uuid@^3.0.0:
+uuid@^3.0.0, uuid@^3.1.0:
   version "3.1.0"
   resolved "http://registry.npm.taobao.org/uuid/download/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
