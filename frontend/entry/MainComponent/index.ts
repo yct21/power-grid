@@ -1,8 +1,8 @@
-import { DOMSource } from "@cycle/dom";
+import { DOMSource } from "@cycle/dom/rxjs-typings";
 import "rxjs/add/operator/switchMap";
 import { switchPage$ } from "socket/switchPage";
 import LandingPage from "LandingPage";
-import { StoreInitialParameters as LandingPageInitialParameters } from "LandingPage/store";
+import { InitialParams as LandingPageInitialParameters } from "LandingPage/store";
 
 // This is actully a router
 export default function MainComponent({DOM: domSource}: {DOM: DOMSource}) {
