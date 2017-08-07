@@ -21,6 +21,7 @@ export interface InitialParams {
 
 export interface Store {
   props: StoreProps,
+  events: StoreEvents,
 }
 
 function onlineNum(initialOnlineNum: number) {
