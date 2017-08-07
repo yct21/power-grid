@@ -1,8 +1,6 @@
 @value primary-background-color from "entry/styles/common.css";
 
 .landing-page {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 
   background-color: primary-background-color;
