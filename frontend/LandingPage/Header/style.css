@@ -1,5 +1,5 @@
 @value dark-primary-color, primary-color, secondary-background-color from "entry/styles/common.css";
-@value header-height 42px;
+@value header-height 2.5em;
 @value header-margin 7%;
 
 .header {

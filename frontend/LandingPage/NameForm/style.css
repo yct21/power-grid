@@ -1,0 +1,34 @@
+@value dark-primary-color, primary-color, secondary-background-color from "entry/styles/common.css";
+@value form-height 3.5em;
+@value margin-top 1em;
+@value margin-side 7%;
+
+.name-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: margin-top margin-side 0 margin-side;
+  height: form-height;
+  background-color: #FFF;
+
+  composes: material-box from "entry/styles/common.css";
+}
+
+.user-name-field {
+  flex: 0 1 13em;
+  padding-left: 1em;
+  composes: material-input-wrapper from "entry/styles/common.css";
+}
+
+.user-name-field-label {
+  composes: material-input-label from "entry/styles/common.css";
+}
+
+.user-name-field-input {
+  composes: material-input from "entry/styles/common.css";
+}
+
+.online-num-field {
+  flex: 0 0 50px;
+}

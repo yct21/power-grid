@@ -1,11 +1,16 @@
 :global {
   html {
     min-height: 100%;
-    font-family: 'Roboto', sans-serif;
+    min-width: 1200px;
+    font-family: "Roboto", sans-serif;
   }
 
   html, body {
     margin: 0;
     padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 }

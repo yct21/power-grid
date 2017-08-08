@@ -8,13 +8,12 @@ export function view(model$: Observable<Model>) {
   return model$.map((props: Model) => {
     const { userName, onlineNum } = props;
     return h(`div.${styles.nameForm}`, [
-      h("div", [
-        h(`div.${styles.userNameField}`, [
-          h("input", { value: userName }),
-        ]),
-        h(`div.${styles.onlineNumField}`, [
-          onlineNum.toString(),
-        ]),
+      h(`div.${styles.userNameField}`, [
+        h(`label.${styles.userNameFieldLabel}`,  "Player Name"),
+        h(`input.${styles.userNameFieldInput}`, { value: userName }),
+      ]),
+      h(`div.${styles.onlineNumField}`, [
+        onlineNum.toString(),
       ]),
     ]);
   });
