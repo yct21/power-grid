@@ -3283,6 +3283,10 @@ nan@^2.3.0:
   version "2.6.2"
   resolved "http://registry.npm.taobao.org/nan/download/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
+nanoid@^0.1.0:
+  version "0.1.0"
+  resolved "http://registry.npm.taobao.org/nanoid/download/nanoid-0.1.0.tgz#4365edaffed98a9858b5f0e0f8e884c93617c06c"
+
 nanomatch@^1.2.0:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/nanomatch/download/nanomatch-1.2.0.tgz#76fdb3d4ae7617e37719e7a4047b840857c0cb1c"

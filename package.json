@@ -12,6 +12,7 @@
     "js-cookie": "^2.1.4",
     "lodash-es": "^4.17.4",
     "material-components-web": "^0.15.0",
+    "nanoid": "^0.1.0",
     "rxjs": "^5.4.1",
     "socket.io": "^2.0.3",
     "uuid": "^3.1.0"
