@@ -6,5 +6,5 @@ export type Model =
   { networkStatus: "offline" | "online" };
 
 export function model(store: Store): Observable<Model> {
-  return store.props.networkStatus$.map((networkStatus) => ({ networkStatus }));
+  return store.networkStatus$.map((networkStatus) => ({ networkStatus }));
 }
