@@ -1,51 +1,26 @@
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
-import "rxjs/add/operator/startWith";
-import { refreshOnlineNum$ } from "socket/refreshOnlineNum";
-import { NetworkStatus, networkStatus$ } from "socket/networkStatus";
-import { userName } from "LandingPage/store/userName";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { DOMSource } from "@cycle/dom/rxjs-typings";
+import { NetworkStatus } from "socket/networkStatus";
+import { onlineNum } from "LandingPage/store/onlineNum";
+import { networkStatus } from "LandingPage/store/networkStatus";
+import { UserName, userName } from "LandingPage/store/userName";
 
-interface StoreProps {
-  onlineNum$: Observable<number>,
-  networkStatus$: Observable<NetworkStatus>,
-  userName$: Observable<String>,
-}
-
-interface StoreEvents {
-  changeUserName$: Subject<string>,
-}
-
+// Parameter comes from a switchPage event from router
 export interface InitialParams {
   onlineNum: number,
 }
 
+// Store properties
 export interface Store {
-  props: StoreProps,
-  events: StoreEvents,
+  onlineNum$: BehaviorSubject<number>,
+  networkStatus$: BehaviorSubject<NetworkStatus>,
+  userName: UserName,
 }
 
-function onlineNum(initialOnlineNum: number) {
+export function createStore(initialParams: InitialParams, DOMSource: DOMSource) {
   return {
-    onlineNum$: refreshOnlineNum$().startWith(initialOnlineNum),
-  }
-}
-
-export function createStore(initialParams: InitialParams) {
-  const { onlineNum$ } = onlineNum(initialParams.onlineNum);
-  const { changeUserName$, userName$ } = userName();
-
-  const events: StoreEvents = {
-    changeUserName$,
-  };
-
-  const props: StoreProps = {
-    onlineNum$,
-    networkStatus$: networkStatus$(),
-    userName$,
-  };
-
-  return {
-    props,
-    events,
+    onlineNum$: onlineNum(initialParams.onlineNum),
+    networkStatus$: networkStatus(),
+    userName: userName(DOMSource),
   }
 }

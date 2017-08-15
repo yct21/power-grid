@@ -15,8 +15,8 @@ interface PageParameters {
 }
 
 export default function LandingPage(pageParameters: PageParameters) {
-  const store = createStore(pageParameters.storeInitialParameters);
   const { DOM } = pageParameters;
+  const store = createStore(pageParameters.storeInitialParameters, DOM);
 
   const header = Header({ DOM, store });
   const nameForm = NameForm({ DOM, store });
