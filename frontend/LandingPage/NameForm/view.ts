@@ -20,26 +20,28 @@ export function view(model$: Observable<Model>) {
     const focusClass = { class: { [ styles.active ]: userNameFocus }};
 
     return h(`div.${styles.nameForm}`, [
-      // Not going to extract it to a MaterialInput component
-      // until we met another Input(type="text")
-      h(`div.${styles.userNameField}`, [
-        h(`label.${styles.userNameFieldLabel}`, focusClass,  "Player Name"),
-        h(`input.${styles.userNameFieldInput}`, { props: {
-          value: userName,
-          maxLength: userNameFieldLength,
-          autocomplete: "off",
-          autocorrect: "off",
-          autocapitalize: "off",
-          spellcheck: false,
-        }}),
-        h("div", [
-          h(`hr.${styles.userNameFieldBr}`),
-          h(`hr.${styles.userNameFieldBr2}`, focusClass),
+      h("div", [
+        // Not going to extract it to a MaterialInput component
+        // until we met another Input(type="text")
+        h(`div.${styles.userNameField}`, [
+          h(`label.${styles.userNameFieldLabel}`,  "Player Name"),
+          h(`input.${styles.userNameFieldInput}`, { props: {
+            value: userName,
+            maxLength: userNameFieldLength,
+            autocomplete: "off",
+            autocorrect: "off",
+            autocapitalize: "off",
+            spellcheck: false,
+          }}),
+          h("div", [
+            h(`hr.${styles.userNameFieldBr}`),
+            h(`hr.${styles.userNameFieldBr2}`, focusClass),
+          ]),
         ]),
-      ]),
-      h(`div.${styles.onlineNumField}`, [
-        onlineNumText(onlineNum),
-      ]),
+        h(`div.${styles.onlineNumField}`, [
+          onlineNumText(onlineNum),
+        ]),
+      ])
     ]);
   });
 }

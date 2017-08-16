@@ -1,18 +1,25 @@
 @value dark-primary-color, primary-color, secondary-background-color from "entry/styles/common.css";
-@value form-height 3.5em;
+@value form-height 5em;
 @value margin-top 1em;
 @value margin-side 7%;
 
 .name-form {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
   margin: margin-top margin-side 0 margin-side;
   height: form-height;
   background-color: #FFF;
 
   composes: material-box from "entry/styles/common.css";
+}
+
+.name-form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.5em;
 }
 
 .user-name-field {
@@ -25,14 +32,10 @@
   composes: material-input-label from "entry/styles/common.css";
 }
 
-.user-name-field-label.active {
-  color: rgb(0, 188, 212);
-}
-
 .user-name-field-input {
   composes: material-input from "entry/styles/common.css";
   color: primary-color;
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
 
 .user-name-field-br {
@@ -48,10 +51,10 @@
 }
 
 .user-name-field-br2 {
-  border-top: none rgb(0, 188, 212);
-  border-left: none rgb(0, 188, 212);
-  border-right: none rgb(0, 188, 212);
-  border-bottom: 2px solid rgb(0, 188, 212);
+  border-top: none primary-color;
+  border-left: none primary-color;
+  border-right: none primary-color;
+  border-bottom: 2px solid primary-color;
   bottom: 8px;
   box-sizing: content-box;
   margin: 0px;
