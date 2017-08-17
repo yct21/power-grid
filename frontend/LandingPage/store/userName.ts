@@ -1,11 +1,7 @@
-import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import "rxjs/add/operator/mapTo";
-import "rxjs/add/operator/map";
-import "rxjs/add/observable/merge";
 import { DOMSource } from "@cycle/dom/rxjs-typings";
 import { getUserName } from "localStorage";
-import { userNameField } from "LandingPage/NameForm";
+import * as userNameEvents from "LandingPage/NameForm/intent";
 
 export interface UserName {
   // The value of userName
@@ -15,35 +11,25 @@ export interface UserName {
   focus$: BehaviorSubject<boolean>;
 }
 
-function value(userNameFieldSource: DOMSource) {
+function value(DOM: DOMSource) {
   const value$ = new BehaviorSubject(getUserName());
 
-  userNameFieldSource
-    .events("input")
-    .map((ev: Event) => (ev.target as HTMLInputElement).value)
-    .subscribe(value$);
+  userNameEvents.changeUserName(DOM).subscribe(value$);
 
   return value$;
 }
 
-function focus(userNameFieldSource: DOMSource) {
+function focus(DOM: DOMSource) {
   const focus$ = new BehaviorSubject(false); // App is started with nothing focused
 
-  Observable
-    .merge(
-      userNameFieldSource.events("focus").mapTo(true),
-      userNameFieldSource.events("blur").mapTo(false),
-    )
-    .subscribe(focus$);
+  userNameEvents.focusOnUserName(DOM).subscribe(focus$);
 
   return focus$;
 }
 
-export function userName(DOMSource: DOMSource): UserName {
-  const userNameFieldSource = DOMSource.select(`.${userNameField}`);
-
+export function userName(DOM: DOMSource): UserName {
   return {
-    focus$: focus(userNameFieldSource),
-    value$: value(userNameFieldSource),
+    focus$: focus(DOM),
+    value$: value(DOM),
   };
 }

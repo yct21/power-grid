@@ -15,8 +15,8 @@ export function NameForm(sources: Sources) {
   };
 }
 
-const userNameField = userNameFieldInput.split(" ")[0];
+export function userNameFieldSource(DOM: DOMSource) {
+  const userNameFieldCssClass = userNameFieldInput.split(" ")[0];
 
-export {
-  userNameField,
-};
+  return DOM.select(`.${userNameFieldCssClass}`);
+}
