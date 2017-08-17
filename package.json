@@ -59,6 +59,8 @@
   "scripts": {
     "dev:server": "node config/devServer.js",
     "test:frontend-unit": "mocha --opts config/mocha.frontend.opts",
-    "test:frontend-unit-watch": "mocha --opts config/mocha.frontend.opts -G --watch --watch-extensions ts"
+    "test:frontend-unit-watch": "mocha --opts config/mocha.frontend.opts -G --watch --watch-extensions ts",
+    "test:backend-unit": "mocha --opts config/mocha.backend.opts",
+    "test:backend-unit-watch": "mocha --opts config/mocha.backend.opts -G --watch --watch-extensions ts"
   }
 }
