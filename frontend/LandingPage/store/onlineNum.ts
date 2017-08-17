@@ -3,7 +3,7 @@ import { refreshOnlineNum$ } from "socket/refreshOnlineNum";
 
 export function onlineNum(initialOnlineNum: number): BehaviorSubject<number> {
   const onlineNum$ = new BehaviorSubject(initialOnlineNum);
-  refreshOnlineNum$().subscribe(onlineNum);
+  refreshOnlineNum$().subscribe(onlineNum$);
 
   return onlineNum$;
 }

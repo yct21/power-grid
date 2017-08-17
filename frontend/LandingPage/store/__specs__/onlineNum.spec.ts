@@ -10,7 +10,8 @@ describe("LandingPage/store/onlineNum", () => {
     const initialOnlineNum = 42;
 
     // and a stream of onlineNum from server
-    const onlineNumFromServer$ = scheduler.createColdObservable("---1-2-3---5--4--");
+    const numbers = { a: 100, b: 10, c: 21, d: -1, e: 7 };
+    const onlineNumFromServer$ = scheduler.createColdObservable("---a-b-c---d--e--", numbers);
     const refreshOnlineNum$ = () => onlineNumFromServer$;
     td.replace("socket/refreshOnlineNum", { refreshOnlineNum$ });
 
@@ -18,7 +19,7 @@ describe("LandingPage/store/onlineNum", () => {
     const onlineNum$ = require("../onlineNum").onlineNum(initialOnlineNum);
 
     // Then it returns a stream of online number
-    scheduler.expectObservable(onlineNum$).toBe("i--1-2-3---5--4--", { i: 42 });
+    scheduler.expectObservable(onlineNum$).toBe("i--a-b-c---d--e--", { ...numbers, i: 42 });
 
     scheduler.flush();
   })
