@@ -1,26 +1,8 @@
-import * as express from "express";
-import * as http from "http";
-import * as socketIO from "socket.io";
+import { createServer } from "socket";
+import { createRedisClient } from "store";
+import { setupUserConnection } from "user/connection";
 
-const app = express();
-const server = http.createServer(app);
-server.listen(8002);
-const io = socketIO(server);
+const io = createServer();
+const redis = createRedisClient();
 
-app.use((req: any, res: any, next: any) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8001');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-
-io.on("connection", function (socket) {
-  console.log(socket.id);
-
-  // const interval = setInterval(() => { socket.emit("switchPage", { onlineNum: 1 })}, 3000 );
-  // socket.on("disconnect", () => {
-  //   clearInterval(interval);
-  // });
-  // socket.on("waitingForRouting", () => {
-  socket.emit("switchPage", { onlineNum: 1 });
-  // });
-});
+setupUserConnection(io, redis);
