@@ -13,6 +13,7 @@
     "lodash-es": "^4.17.4",
     "material-components-web": "^0.15.0",
     "nanoid": "^0.1.0",
+    "redis": "^2.8.0",
     "rxjs": "^5.4.1",
     "socket.io": "^2.0.3",
     "uuid": "^3.1.0"
@@ -24,6 +25,7 @@
     "@types/lodash-es": "^4.14.5",
     "@types/mocha": "^2.2.41",
     "@types/react-router": "^4.0.12",
+    "@types/redis": "^2.6.0",
     "@types/socket.io": "^1.4.29",
     "@types/socket.io-client": "^1.4.29",
     "@types/uuid": "^3.4.0",
