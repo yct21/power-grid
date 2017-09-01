@@ -6,22 +6,22 @@ describe("index", () => {
     const fakeServer = "fakeServer";
     const createServer = td.function();
     td.when(createServer()).thenReturn(fakeServer);
-    td.replace("socket", { createServer });
+    td.replace("utils/socketIO", { createServer });
 
     // And we could create a redis client
     const fakeRedisClient = "fakeRedisClient";
     const createRedisClient = td.function();
     td.when(createRedisClient()).thenReturn(fakeRedisClient);
-    td.replace("store", { createRedisClient });
+    td.replace("utils/redis", { createRedisClient });
 
     // And we could manage our user connections
-    const fakeSetupUserConnection = td.function();
-    td.replace("user/connection", { setupUserConnection: fakeSetupUserConnection });
+    const fakeSetupSocketServer = td.function();
+    td.replace("socket", { setupSocketServer: fakeSetupSocketServer });
 
     // When invoking backend
     require("../index");
 
     // Then it sets up user connection
-    td.verify(fakeSetupUserConnection(fakeServer, fakeRedisClient));
+    td.verify(fakeSetupSocketServer(fakeServer, fakeRedisClient));
   })
 });

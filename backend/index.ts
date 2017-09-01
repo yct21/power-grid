@@ -1,8 +1,8 @@
-import { createServer } from "socket";
-import { createRedisClient } from "store";
-import { setupUserConnection } from "user/connection";
+import { createServer } from "utils/socketIO";
+import { createRedisClient } from "utils/redis";
+import { setupSocketServer } from "socket";
 
 const io = createServer();
 const redis = createRedisClient();
 
-setupUserConnection(io, redis);
+setupSocketServer(io, redis);
