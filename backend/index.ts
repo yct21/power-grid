@@ -1,8 +1,31 @@
-import { createServer } from "utils/socketIO";
-import { createRedisClient } from "utils/redis";
-import { setupSocketServer } from "socket";
+import { createStore } from "store";
+import { createSocketServer } from "socket";
+import { runApp } from "main";
 
-const io = createServer();
-const redis = createRedisClient();
+/*
 
-setupSocketServer(io, redis);
+     +-----------------+
+     |      main       |
+     |(Business logic) |<----------------+
+     +-----------------+                 |
+              ^                          |
+              |                          |
+              |                          v
+              v                +------------------+
+     +-----------------+       |                  |
+     |      store      |       |      socket      |     +-----------------+
+     +-----------------+       |(socketIO/express)|<--->|     client      |
+              ^                |                  |     +-----------------+
+      +-------+-------+        +------------------+
+      |               |
+      v               v
+  +-------+       +------+
+  | redis |       | heap |
+  +-------+       +------+
+
+  */
+
+const store = createStore();
+const socketServer = createSocketServer();
+
+runApp(store, socketServer);
