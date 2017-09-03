@@ -1,26 +1,36 @@
-import * as express from "express";
-import * as http from "http";
-import * as socketIO from "socket.io";
+import * as Rx from "rxjs/Rx";
+import { createStore$ } from "store";
+import { createSocketServer$ } from "socket";
+import { runApp } from "main";
 
-const app = express();
-const server = http.createServer(app);
-server.listen(8002);
-const io = socketIO(server);
+/*
 
-app.use((req: any, res: any, next: any) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8001');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+     +-----------------+
+     |      main       |
+     |(Business logic) |<----------------+
+     +-----------------+                 |
+              ^                          |
+              |                          |
+              |                          v
+              v                +------------------+
+     +-----------------+       |                  |
+     |      store      |       |      socket      |     +-----------------+
+     +-----------------+       |(socketIO/express)|<--->|     client      |
+              ^                |                  |     +-----------------+
+      +-------+-------+        +------------------+
+      |               |
+      v               v
+  +-------+       +------+
+  | redis |       | heap |
+  +-------+       +------+
 
-io.on("connection", function (socket) {
-  console.log(socket.id);
+  We put "entry" of server part in "main" (business logic) module.
+  We could do it since this App is heavily based on rxjs.
+  */
 
-  // const interval = setInterval(() => { socket.emit("switchPage", { onlineNum: 1 })}, 3000 );
-  // socket.on("disconnect", () => {
-  //   clearInterval(interval);
-  // });
-  // socket.on("waitingForRouting", () => {
-  socket.emit("switchPage", { onlineNum: 1 });
-  // });
-});
+// Why we have to use rxjs instead of promise...
+Rx.Observable.zip(createStore$(), createSocketServer$())
+  .first()
+  .subscribe(([store, socketServer]) => {
+    runApp(store, socketServer);
+  });

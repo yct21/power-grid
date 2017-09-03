@@ -6,6 +6,7 @@ const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plug
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const FriendlyErrors = require("friendly-errors-webpack-plugin");
 const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
+const webpackBundleAnalyzer = require("webpack-bundle-analyzer");
 
 // environment parameters
 const developmentEnvParameters = require("./env.development.json");
@@ -167,6 +168,7 @@ function pluginsConfig(env) {
     ];
   } else if (env === "development") {
     return [
+      new webpackBundleAnalyzer.BundleAnalyzerPlugin(),
       new TsConfigPathsPlugin({
         tsconfig: "frontend/tsconfig.json",
         compiler: "typescript",

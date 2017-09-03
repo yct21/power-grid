@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "build/dist",
+    "alwaysStrict": true,
     "module": "commonjs",
     "target": "es5",
     "lib": ["es6", "dom"],
@@ -18,13 +19,8 @@
     "baseUrl": "./",
     "noUnusedLocals": true
   },
+  "include": ["../typings", "./"],
   "exclude": [
-    "node_modules",
-    "build",
-    "config",
     "**/*.spec.ts"
-  ],
-  "types": [
-    "typePatches"
   ]
 }

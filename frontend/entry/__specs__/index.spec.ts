@@ -20,6 +20,9 @@ describe("entry/index", () => {
     td.when(fakeMakeDomDriver("#app")).thenReturn(dom);
     td.replace("@cycle/dom", { makeDOMDriver: fakeMakeDomDriver });
 
+    // And we have style sheets
+    td.replace("entry/styles/index.css", null);
+
     // And we can render the MainComponent by running it with driver
     const fakeRun = td.function("run");
     td.replace("@cycle/rxjs-run", { run: fakeRun });

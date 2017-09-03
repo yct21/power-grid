@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "build/backend",
+    "alwaysStrict": true,
     "module": "commonjs",
     "target": "es5",
     "lib": ["es6"],
@@ -17,13 +18,8 @@
     "baseUrl": "./",
     "noUnusedLocals": true
   },
+  "include": ["../typings", "./"],
   "exclude": [
-    "node_modules",
-    "build",
-    "config",
     "**/*.spec.ts"
-  ],
-  "types": [
-    "typePatches"
   ]
 }
