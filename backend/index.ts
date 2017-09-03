@@ -1,5 +1,6 @@
-import { createStore } from "store";
-import { createSocketServer } from "socket";
+import * as Rx from "rxjs/Rx";
+import { createStore$ } from "store";
+import { createSocketServer$ } from "socket";
 import { runApp } from "main";
 
 /*
@@ -23,9 +24,13 @@ import { runApp } from "main";
   | redis |       | heap |
   +-------+       +------+
 
+  We put "entry" of server part in "main" (business logic) module.
+  We could do it since this App is heavily based on rxjs.
   */
 
-const store = createStore();
-const socketServer = createSocketServer();
-
-runApp(store, socketServer);
+// Why we have to use rxjs instead of promise...
+Rx.Observable.zip(createStore$(), createSocketServer$())
+  .first()
+  .subscribe(([store, socketServer]) => {
+    runApp(store, socketServer);
+  });
