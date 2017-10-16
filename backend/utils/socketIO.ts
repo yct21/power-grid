@@ -7,7 +7,6 @@ type Server = SocketIO.Server;
 type Socket = SocketIO.Socket;
 type Observable<T> = Rx.Observable<T>;
 
-
 export function createServer(): SocketIO.Server {
   const app = express();
   const server = http.createServer(app);

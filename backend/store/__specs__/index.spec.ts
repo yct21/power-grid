@@ -1,7 +1,7 @@
 import * as td from "testdouble";
 import * as Rx from "rxjs/Rx";
 import { assert } from "chai";
-import { Store } from "store";
+import { Store } from "../index";
 
 describe("store/index", () => {
   it("Feature: it could create a store", () => {

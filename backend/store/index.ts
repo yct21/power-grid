@@ -4,14 +4,15 @@ import { GameRoom, parseRoom } from "store/gameRoom";
 import * as redis from "utils/redis";
 
 /*
-  What we want access from store
+  Application state
 
-  - gameRooms (heap)
+  - gameRooms
 
   */
 
 export interface Store {
   redisClient: RedisClient,
+  onlineNum: number,
   gameRooms: {
     [gameId: string]: GameRoom,
   }
@@ -32,11 +33,11 @@ function getRooms$(redisClient: RedisClient, roomIdList: string[]) {
     .map((roomList) => Object.assign({}, ...roomList.map((room) => ({[room.id]: room}))))
 }
 
-export function createStore$() {
+export function createStore$(): Store {
   const redisClient = redis.createRedisClient();
 
   return getRoomIdList$(redisClient)
     .first() // Not needed actually
     .mergeMap((gameRoomIdList: string[]) => getRooms$(redisClient, gameRoomIdList))
-    .map((gameRooms) => ({redisClient, gameRooms}));
+    .map((gameRooms) => ({redisClient, gameRooms, onlineNum: 0}));
 }
