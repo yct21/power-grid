@@ -1,4 +1,0 @@
---require config/mocha.backend.setup.js
---reporter dot
-config/mocha.hooks.js
-backend/**/*.spec.ts
