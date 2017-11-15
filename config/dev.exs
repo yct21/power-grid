@@ -39,8 +39,7 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :power_grid, PowerGrid.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "yct21",
   database: "power_grid_dev",
   hostname: "localhost",
   pool_size: 10
