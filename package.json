@@ -5,11 +5,7 @@
   "author": "Chutian Yang <yct21@12tcy.com>",
   "license": "MIT",
   "dependencies": {
-    "phoenix": "^1.3.0",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "phoenix": "^1.3.0"
   },
   "devDependencies": {
     "@types/phoenix": "^0.0.4",
