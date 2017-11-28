@@ -4,6 +4,8 @@ defmodule PowerGrid.Mixfile do
   def project do
     [
       app: :power_grid,
+      config_path: "config/server/config.exs",
+      build_path: "_build/server",
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
@@ -28,6 +30,10 @@ defmodule PowerGrid.Mixfile do
   defp elixirc_paths(:test), do: ["server", "test/server/support"]
   defp elixirc_paths(_),     do: ["server"]
 
+  # Specifies which paths to build application
+  def build_path, do: "_build/server"
+  def build_path(_), do: "_build/server"
+
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
@@ -38,7 +44,8 @@ defmodule PowerGrid.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:distillery, "~> 1.5", runtime: false},
     ]
   end
 
