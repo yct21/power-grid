@@ -48,6 +48,7 @@ defmodule PowerGrid.Mixfile do
       {:distillery, "~> 1.5", runtime: false},
       {:redix, ">= 0.6.0"},
       {:redix_pubsub, ">= 0.4.1"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
     ]
   end
 
