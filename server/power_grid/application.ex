@@ -1,6 +1,15 @@
 defmodule PowerGrid.Application do
   use Application
 
+  @moduledoc """
+  The Application
+
+  - Repo (Persistence)
+  - Endpoint (Web)
+  - Redis.Supervisor (PubSub with game logic)
+  """
+
+
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
@@ -14,6 +23,7 @@ defmodule PowerGrid.Application do
       supervisor(PowerGridWeb.Endpoint, []),
       # Start your own worker by calling: PowerGrid.Worker.start_link(arg1, arg2, arg3)
       # worker(PowerGrid.Worker, [arg1, arg2, arg3]),
+      supervisor(PowerGrid.Redis.Supervisor, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
