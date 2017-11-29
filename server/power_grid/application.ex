@@ -1,6 +1,15 @@
 defmodule PowerGrid.Application do
   use Application
 
+  @moduledoc """
+  The Application
+
+  - Repo (Persistence)
+  - Endpoint (Web)
+  - Redis.Supervisor (PubSub with game logic)
+  """
+
+
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
