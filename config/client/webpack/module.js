@@ -16,7 +16,10 @@ function cssLoaders (options) {
   var postcssLoader = {
     loader: 'postcss-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+      config: {
+        path: 'config/client/.postcssrc.js',
+      },
     }
   }
 
@@ -27,7 +30,7 @@ function cssLoaders (options) {
       loaders.push({
         loader: loader + '-loader',
         options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
+          sourceMap: options.sourceMap,
         })
       })
     }
