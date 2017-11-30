@@ -2,5 +2,6 @@
 
 Client side configurations.
 
-- `env.js`: environment variables
+- `environment`: environment variables
 - `webpack`: webpack configurations
+- `.postcssrc.js`: postcss configurations
