@@ -39,7 +39,7 @@ module.exports = (env) => {
       // https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: 'index.html',
+        template: 'client/entry/index.html',
         inject: true
       }),
       new FriendlyErrorsPlugin({
@@ -86,7 +86,7 @@ module.exports = (env) => {
       // see https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
         filename: env.index,
-        template: 'index.html',
+        template: 'client/entry/index.html',
         inject: true,
         minify: {
           removeComments: true,
@@ -135,7 +135,7 @@ module.exports = (env) => {
       // copy custom static assets
       new CopyWebpackPlugin([
         {
-          from: path.posix.join(env.context, env.assetsSubDirectory)
+          from: path.posix.join(env.context, env.assetsSubDirectory),
           to: env.assetsSubDirectory,
           ignore: ['.*']
         }

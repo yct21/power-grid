@@ -3,10 +3,6 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-function resolve (dir) {
-  return path.join(__dirname, '../..', dir)
-}
-
 function cssLoaders (options) {
   options = options || {}
 
@@ -73,21 +69,21 @@ function cssLoadersStandalone (options) {
   return output
 }
 
-function eslintRule (env) {
-  if (env.useEslint) {
-    return {
-      test: /\.(js|vue)$/,
-      loader: 'eslint-loader',
+function tsRules (env) {
+  return [{
+      test: /\.ts$/,
+      exclude: /node_modules/,
       enforce: 'pre',
-      include: [env.srcDirectory],
+      loader: 'tslint-loader',
+    }, {
+      test: /\.ts$/,
+      exclude: /node_modules/,
+      loader: 'ts-loader',
       options: {
-        formatter: require('eslint-friendly-formatter'),
-        emitWarning: !env.showEslintErrorsInOverlay
-      }
-    }
-  } else {
-    return null
-  }
+        configFile: 'client/tsconfig.json',
+      },
+    },
+  ]
 }
 
 function vueRule (env) {
@@ -119,14 +115,6 @@ function vueRule (env) {
   }
 }
 
-function jsRule (env) {
-  return {
-    test: /\.js$/,
-    loader: 'babel-loader',
-    include: [ resolve('slides') ],
-  }
-}
-
 function urlRules (env) {
   const assetsPath = (assetName) => path.posix.join(env.assetsSubDirectory, assetName)
   return [{
@@ -155,9 +143,8 @@ function urlRules (env) {
 
 module.exports = (env) => ({
   rules: [
-    eslintRule(env),
+    ...tsRules(env),
     vueRule(env),
-    jsRule(env),
     ...cssLoadersStandalone({ sourceMap: env.cssSourceMap, usePostCSS: true }),
     ...urlRules(env),
   ].filter((rule) => rule !== null)
