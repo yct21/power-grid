@@ -3,7 +3,7 @@
 const portfinder = require('portfinder')
 
 module.exports = new Promise((resolve, reject) => {
-  const env = require('../env')['development'];
+  const env = require('../env/development')
 
   portfinder.basePort = process.env.PORT || env.defaultPort
   portfinder.getPort((err, port) => {

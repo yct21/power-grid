@@ -1,6 +1,6 @@
 'use strict'
 
-const env = require('../env')['production'];
+const env = require('../environment/production')
 
 module.exports = {
   context: require('./context')(env),
