@@ -19,7 +19,7 @@
     "baseUrl": "./",
     "noUnusedLocals": true
   },
-  "include": ["./"],
+  "include": ["./", "../typings"],
   "exclude": [
     "**/*.spec.ts"
   ]
