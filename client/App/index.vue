@@ -1,7 +1,7 @@
 <template>
-<p>
-  meow
-</p>
+  <p>
+    meow
+  </p>
 </template>
 
 <script lang="ts">

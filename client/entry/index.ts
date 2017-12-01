@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import 'entry/global.css'
-import Main from '../Main/index.vue'
+import App from '../App/index.vue'
 
 new Vue({
   el: '#app',
-  components: { Main },
-  template: '<Main />'
+  components: { App },
+  template: '<App />'
 })
