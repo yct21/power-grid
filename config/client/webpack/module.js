@@ -84,6 +84,7 @@ function tsRules (env) {
       loader: 'ts-loader',
       options: {
         configFile: 'client/tsconfig.json',
+        appendTsSuffixTo: [/\.vue$/],
       },
     },
   ]

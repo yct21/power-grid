@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const context = path.resolve(__dirname, '../../') // root
+const context = path.resolve(__dirname, '../../../') // root
 
 module.exports = {
   nodeEnv: 'development',
