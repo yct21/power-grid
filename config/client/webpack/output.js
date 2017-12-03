@@ -16,6 +16,10 @@ module.exports = (env) => {
       path: env.assetsRoot,
       filename,
       chunkFilename: filename,
+
+      // https://indium.readthedocs.io/en/latest/debugger.html#webpack
+      devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+      devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
     }
   }
 
