@@ -1,0 +1,4 @@
+--require support/client-ut/resolve_ts_config.js
+--reporter dot
+support/client-ut/hooks.js
+client/**/*.spec.ts
