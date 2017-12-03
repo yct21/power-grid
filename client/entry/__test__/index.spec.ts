@@ -1,7 +1,15 @@
-import { assert } from 'chai'
+import * as td from 'testdouble'
 
-describe('it is a test', () => {
-  it('meow', () => {
-    assert.ok(true)
+describe('entry/index', () => {
+  it('gets application started', () => {
+    // Given we could initialize Vue and mount it to DOM
+    const initVue = td.function()
+    td.replace('entry/initVue', { initVue })
+
+    // When started
+    require('../index')
+
+    // Then Vue is initialized and mounted
+    td.verify(initVue())
   })
 })
