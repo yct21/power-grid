@@ -18,6 +18,10 @@
   version "0.0.4"
   resolved "http://registry.npm.taobao.org/@types/phoenix/download/@types/phoenix-0.0.4.tgz#6ada6be91dfdc1fa77ed57691f92821920f71d12"
 
+"@types/storejs@^2.0.0":
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/@types/storejs/download/@types/storejs-2.0.0.tgz#78d92b67924001dc96774bdf1c8340cf46e8b5db"
+
 abbrev@1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"

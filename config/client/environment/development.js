@@ -30,6 +30,9 @@ module.exports = {
   // in the browser.
   showEslintErrorsInOverlay: true,
 
+  // phoenix channel
+  serverSocket: 'localhost:8081/socket',
+
   /**
    * Source Maps
    */

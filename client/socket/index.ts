@@ -6,6 +6,7 @@ interface Socket {
 
 export function initSocket (url: string): Socket {
   const socket = new PhoenixSocket(url)
+  socket.connect()
 
   return {
     socket,
