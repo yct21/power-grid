@@ -12,6 +12,7 @@
     "client:ut:watch": "yarn run client:ut -G --watch --watch-extensions ts"
   },
   "dependencies": {
+    "nanoid": "^1.0.1",
     "phoenix": "^1.3.0",
     "redis": "^2.8.0",
     "rxjs": "^5.5.2",

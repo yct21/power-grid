@@ -18,10 +18,6 @@
   version "0.0.4"
   resolved "http://registry.npm.taobao.org/@types/phoenix/download/@types/phoenix-0.0.4.tgz#6ada6be91dfdc1fa77ed57691f92821920f71d12"
 
-"@types/storejs@^2.0.0":
-  version "2.0.0"
-  resolved "http://registry.npm.taobao.org/@types/storejs/download/@types/storejs-2.0.0.tgz#78d92b67924001dc96774bdf1c8340cf46e8b5db"
-
 abbrev@1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -2763,6 +2759,10 @@ multicast-dns@^6.0.1:
 nan@^2.3.0:
   version "2.7.0"
   resolved "http://registry.npm.taobao.org/nan/download/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
+
+nanoid@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/nanoid/download/nanoid-1.0.1.tgz#58a8e0577d9db07ae4f231a3afa59af94e4fc439"
 
 nanomatch@^1.2.5:
   version "1.2.6"
