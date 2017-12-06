@@ -2,20 +2,29 @@ import * as td from 'testdouble'
 
 describe('entry/index', () => {
   it('gets application started', () => {
-    // Given we could initialize websocket
-    const initSocket = td.function()
-    td.replace('socket', { initSocket })
+    // Given we could load application parameters from URL query and localStorage
+    const loadParameters = td.function()
+    const socketUrl = 'stubSocketUrl'
+    const userId = 'stubUserId'
+    const currentGameId = 'stubCurrentGameId'
+    td.when(loadParameters()).thenReturn({ socketUrl, userId, currentGameId })
+    td.replace('entry/loadParameters', { loadParameters })
 
-    // And we could initialize Vue and mount it to DOM
+    // And we could initialize Vue and install plugins on it
     const initVue = td.function()
-    td.replace('entry/vue', { initVue })
+    td.replace('entry/initVue', { initVue })
+
+    // And we could start application with loaded parameters
+    const startApp = td.function()
+    td.replace('App', { startApp })
 
     // When started
     require('../index')
 
-    // Then websocket is initialized
-
-    // Then Vue is initialized and mounted
+    // Then Vue is configured and installed with plugins
     td.verify(initVue())
+
+    // And the real application is started
+    td.verify(startApp(socketUrl, userId, currentGameId))
   })
 })

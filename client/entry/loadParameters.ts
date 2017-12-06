@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Observable'
-import { of as toObservable } from 'rxjs/Observable/of'
+// import { Observable } from 'rxjs/Observable'
+// import { of as toObservable } from 'rxjs/Observable/of'
 import generate from 'nanoid/generate'
 
 interface Parameters {
@@ -32,7 +32,7 @@ function generateUserId (): string {
   return userId
 }
 
-export function loadParameters (): Observable<Parameters> {
+export function loadParameters (): Parameters {
   const userId =
     getQueryString('userId') ||
     localStorage.getItem('userId') ||
@@ -47,5 +47,5 @@ export function loadParameters (): Observable<Parameters> {
     socketUrl,
   }
 
-  return toObservable(parameters)
+  return parameters
 }

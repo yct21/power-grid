@@ -5,16 +5,14 @@ import { Subscription } from 'rxjs/Subscription'
 import { Subject } from 'rxjs/Subject'
 import App from 'App/index.vue'
 
-export function initVue () {
+function installVueRx() {
   Vue.use(VueRx, {
     Observable,
     Subscription,
     Subject,
   })
+}
 
-  new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App />'
-  })
+export function initVue () {
+  installVueRx()
 }
