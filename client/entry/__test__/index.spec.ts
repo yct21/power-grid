@@ -24,7 +24,7 @@ describe('entry/index', () => {
     // Then Vue is configured and installed with plugins
     td.verify(initVue())
 
-    // And the real application is started
+    // And the real application is started with loaded parameters
     td.verify(startApp(socketUrl, userId, currentGameId))
   })
 })

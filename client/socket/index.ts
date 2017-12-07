@@ -21,10 +21,6 @@ export interface Channel {
   onError$: Observable<null>,
 }
 
-// function enterChannel (socket: Socket) {
-
-// }
-
 export function joinChannel (socket: Socket, channelName: string): Channel {
   const phxChannel = socket.phxSocket.channel(channelName, {})
   const channelPush = phxChannel.join() // I have no idea why phoenix named it "push"
@@ -37,12 +33,14 @@ export function joinChannel (socket: Socket, channelName: string): Channel {
     channelPush.receive('error', () => { obs.next(null) })
   })
 
-  return {
+  const channel = {
     channelName,
     phxChannel,
     onOpen$: channelOpen$,
     onError$: channelError$,
   }
+
+  return channel
 }
 
 export function initSocket (url: string, channelName: string): Socket {
@@ -61,10 +59,12 @@ export function initSocket (url: string, channelName: string): Socket {
     phxSocket.onClose(() => {obs.next(null) })
   })
 
-  return {
+  const socket = {
     phxSocket,
     onOpen$: socketOpen$,
     onError$: socketError$,
     onClose$: socketClose$,
   }
+
+  return socket
 }
