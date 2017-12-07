@@ -1,5 +1,7 @@
-import { initSocket } from 'socket'
-import { initVue } from 'entry/vue'
+import { initVue } from 'entry/initVue'
+import { startApp } from 'App'
+import { loadParameters } from 'entry/loadParameters'
 
-initSocket('meow')
+const { userId, currentGameId, socketUrl } = loadParameters()
 initVue()
+startApp(socketUrl, userId, currentGameId)

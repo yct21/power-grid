@@ -1,14 +1,70 @@
-import { Socket as PhoenixSocket } from 'phoenix'
+import { Observer } from 'rxjs/Observer'
+import { Observable } from 'rxjs/Observable'
+import { Channel as PhoenixChannel, Socket as PhoenixSocket } from 'phoenix'
 
-interface Socket {
-  socket: PhoenixSocket,
+export interface Socket {
+  // The real socket
+  phxSocket: PhoenixSocket,
+
+  // Events as rxjs Observables
+  onOpen$: Observable<null>,
+  onError$: Observable<null>, // phoenix doesn't expose error reason
+  onClose$: Observable<null>,
 }
 
-export function initSocket (url: string): Socket {
-  const socket = new PhoenixSocket(url)
-  socket.connect()
+export interface Channel {
+  channelName: string,
+  phxChannel: PhoenixChannel,
 
-  return {
-    socket,
+  // Events as rxjs Observables
+  onOpen$: Observable<null>,
+  onError$: Observable<null>,
+}
+
+export function joinChannel (socket: Socket, channelName: string): Channel {
+  const phxChannel = socket.phxSocket.channel(channelName, {})
+  const channelPush = phxChannel.join() // I have no idea why phoenix named it "push"
+
+  const channelOpen$ = Observable.create((obs: Observer<null>) => {
+    channelPush.receive('ok', () => { obs.next(null) })
+  })
+
+  const channelError$ = Observable.create((obs: Observer<null>) => {
+    channelPush.receive('error', () => { obs.next(null) })
+  })
+
+  const channel = {
+    channelName,
+    phxChannel,
+    onOpen$: channelOpen$,
+    onError$: channelError$,
   }
+
+  return channel
+}
+
+export function initSocket (url: string, channelName: string): Socket {
+  const phxSocket = new PhoenixSocket(url)
+  phxSocket.connect()
+
+  const socketOpen$ = Observable.create((obs: Observer<null>) => {
+    phxSocket.onOpen(() => { obs.next(null) })
+  })
+
+  const socketError$ = Observable.create((obs: Observer<null>) => {
+    phxSocket.onError(() => {obs.next(null) })
+  })
+
+  const socketClose$ = Observable.create((obs: Observer<null>) => {
+    phxSocket.onClose(() => {obs.next(null) })
+  })
+
+  const socket = {
+    phxSocket,
+    onOpen$: socketOpen$,
+    onError$: socketError$,
+    onClose$: socketClose$,
+  }
+
+  return socket
 }
