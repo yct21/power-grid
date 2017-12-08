@@ -1,5 +1,6 @@
 import { Observer } from 'rxjs/Observer'
 import { Observable } from 'rxjs/Observable'
+import { fromEventPattern } from 'rxjs/Observable/fromEventPattern'
 import { Channel as PhoenixChannel, Socket as PhoenixSocket } from 'phoenix'
 
 export interface Socket {
@@ -41,6 +42,14 @@ export function joinChannel (socket: Socket, channelName: string): Channel {
   }
 
   return channel
+}
+
+// T is the type of responsed message
+export function listen<T> (channel: Channel, event: string): Observable<T> {
+  const on = (cb: (response?: T) => void ) => channel.phxChannel.on(event, cb)
+  // Remove all observers when one of them unsubscribed
+  const off = (cb: (response?: T) => void ) => channel.phxChannel.off(event)
+  return fromEventPattern(on, off)
 }
 
 export function initSocket (url: string, channelName: string): Socket {
