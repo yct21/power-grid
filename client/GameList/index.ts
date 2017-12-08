@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Game } from 'GameList/Game'
-import { Channel, listen } from 'socket'
+import { Channel } from 'socket'
 
 export interface GameList {
   // list of games
@@ -12,7 +12,5 @@ export function getGames (gameList: GameList): Game[] {
 }
 
 export function initGameList (mainMenuChannel: Channel) {
-  const updateGameList$ = listen<Game[]>(mainMenuChannel, 'main-menu:update-game-list')
-
-  const gameList =
+  // const updateGameList$ = listen<Game[]>(mainMenuChannel, 'main-menu:update-game-list')
 }
