@@ -1,7 +1,6 @@
 module.exports = (env) => ({
-  extensions: ['.ts', '.js', '.vue', '.json'],
+  extensions: ['.ts', '.tsx', '.js', '.json'],
   modules: [env.srcDirectory, "node_modules"],
   alias: {
-    'vue$': 'vue/dist/vue.esm.js',
   },
 })
