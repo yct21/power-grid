@@ -12,6 +12,8 @@
     "client:ut:watch": "yarn run client:ut -G --watch --watch-extensions ts"
   },
   "dependencies": {
+    "mobx": "^3.4.1",
+    "mobx-state-tree": "^1.2.1",
     "nanoid": "^1.0.1",
     "phoenix": "^1.3.0",
     "react": "^16.2.0",

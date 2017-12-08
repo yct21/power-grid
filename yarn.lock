@@ -2492,6 +2492,14 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0, mkdi
   dependencies:
     minimist "0.0.8"
 
+mobx-state-tree@^1.2.1:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/mobx-state-tree/download/mobx-state-tree-1.2.1.tgz#ce15ed5d2d7e82bb83d66de12a22fb56400f45d1"
+
+mobx@^3.4.1:
+  version "3.4.1"
+  resolved "http://registry.npm.taobao.org/mobx/download/mobx-3.4.1.tgz#37abe5ee882d401828d9f26c6c1a2f47614bbbef"
+
 mocha@^4.0.1:
   version "4.0.1"
   resolved "http://registry.npm.taobao.org/mocha/download/mocha-4.0.1.tgz#0aee5a95cf69a4618820f5e51fa31717117daf1b"
