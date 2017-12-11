@@ -7,12 +7,12 @@ import { AppModel, IAppModel } from 'App/model'
 import { initSocket, joinChannel, listen$, Socket, Channel } from 'socket'
 import 'entry/global.css'
 
-const { currentGameId, socketUrl} = loadParameters()
+const { userId, currentGameId, socketUrl} = loadParameters()
 const channelName = currentGameId ?
   `GameBoard-${currentGameId}` :
   `MainMenu`
 
-const socket: Socket = initSocket(socketUrl, channelName)
+const socket: Socket = initSocket(socketUrl, userId, channelName)
 const channel: Channel = joinChannel(socket, channelName)
 
 socket.onOpen$.pipe(
