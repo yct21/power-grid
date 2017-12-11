@@ -45,9 +45,9 @@ export function joinChannel (socket: Socket, channelName: string): Channel {
 }
 
 // T is the type of responsed message
-export function listen<T> (channel: Channel, event: string): Observable<T> {
+export function listen$<T> (channel: Channel, event: string): Observable<T> {
   const on = (cb: (response?: T) => void ) => channel.phxChannel.on(event, cb)
-  // Remove all observers when one of them unsubscribed
+  // Remove all observers when one of them gets unsubscribed
   const off = (cb: (response?: T) => void ) => channel.phxChannel.off(event)
   return fromEventPattern(on, off)
 }

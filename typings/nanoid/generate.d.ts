@@ -1,4 +1,4 @@
-declare module "nanoid/generate" {
-  function generate(alphabet: string, size:number): string;
-  export = generate;
+declare module 'nanoid/generate' {
+  const generate: (charset: string, length: number) => string;
+  export = generate
 }

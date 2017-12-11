@@ -19,7 +19,7 @@ function createNotifierCallback () {
 
     const filename = error.file && error.file.split('!').pop()
     notifier.notify({
-      title: "template-playground",
+      title: "webpack-dev-server",
       message: severity + ': ' + error.name,
       subtitle: filename || '',
       icon: path.join(__dirname, '../../static/logo.png')

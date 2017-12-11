@@ -8,7 +8,7 @@ module.exports = {
   // Paths
   context,
   srcDirectory: path.join(context, 'client'),
-  srcEntry: path.resolve(context, 'client/entry/index.ts'),
+  srcEntry: path.resolve(context, 'client/entry/index.tsx'),
   assetsSubDirectory: 'static',
   assetsPublicPath: '/',
   assetsRoot: path.resolve(context, '_build/client'),
@@ -22,16 +22,8 @@ module.exports = {
   notifyOnErrors: true,
   poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-  // Use Eslint Loader?
-  // If true, your code will be linted during bundling and
-  // linting errors and warnings will be shown in the console.
-  useEslint: false,
-  // If true, eslint errors and warnings will also be shown in the error overlay
-  // in the browser.
-  showEslintErrorsInOverlay: true,
-
   // phoenix channel
-  serverSocket: 'localhost:8081/socket',
+  serverSocket: 'ws://0.0.0.0:8081/socket',
 
   /**
    * Source Maps
