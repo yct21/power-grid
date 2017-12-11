@@ -23,7 +23,7 @@ module.exports = {
   poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
   // phoenix channel
-  serverSocket: 'localhost:8081/socket',
+  serverSocket: 'ws://0.0.0.0:8081/socket',
 
   /**
    * Source Maps

@@ -47,7 +47,7 @@ function tsRule (env) {
         [ tsLoader ]
 
   return {
-    test: /\.tsx$/,
+    test: /\.tsx?$/,
     exclude: /node_modules/,
     use: useEntry,
   }
