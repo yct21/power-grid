@@ -30,7 +30,6 @@ defmodule PowerGrid.Redis.PubSub do
 
   def handle_info({:redix_pubsub, pubsub, :message, %{channel: power_grid, payload: payload}}, _) do
     if payload === "pong" do
-      IO.inspect payload
       Redix.command!(:"redix_client_4", ~w(PUBLISH power_grid ping))
     end
 
