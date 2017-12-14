@@ -7,6 +7,8 @@ defmodule PowerGridWeb.MainMenuChannel do
   - refresh game list
   """
 
+  @online_number_agent PowerGrid.OnlineNum
+
   def join("MainMenu", _params, socket) do
     update_online_num(&(&1 + 1))
 
@@ -16,8 +18,8 @@ defmodule PowerGridWeb.MainMenuChannel do
 
   def handle_info(:after_join, socket) do
     push socket, "initialize", %{
-      "onlineNum" => PowerGrid.OnlineNum.get(),
-      "gameList" => [],
+      "onlineNum" => @online_number_agent.get(),
+      "gameList" => %{},
     }
 
     {:noreply, socket}
@@ -29,6 +31,10 @@ defmodule PowerGridWeb.MainMenuChannel do
     {:noreply, socket}
   end
 
+  def terminate(_, _) do
+    update_online_num(&(&1 - 1))
+  end
+
   defp update_online_num(fun) do
     online_num_fun = fn origin_number ->
       updated_number = fun.(origin_number)
@@ -36,7 +42,7 @@ defmodule PowerGridWeb.MainMenuChannel do
       {updated_number, updated_number}
     end
 
-    number = PowerGrid.OnlineNum.get_and_update(online_num_fun)
+    number = @online_number_agent.get_and_update(online_num_fun)
     send(self(), {:update_online_num, number})
   end
 end
