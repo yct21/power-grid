@@ -2,9 +2,11 @@ import { types, getEnv } from 'mobx-state-tree'
 import { Subscription } from 'rxjs/Subscription'
 import { Channel, listen$ } from 'socket'
 
-export const OnlineNum = types.model({
+export const OnlineNum = types.model('OnlineNum', {
   count: types.number,
-}).actions(self => ({
+}).preProcessSnapshot((snapshot: number) => ({
+  count: snapshot,
+})).actions(self => ({
   updateCount (num: number) {
     self.count = num
   },

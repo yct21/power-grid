@@ -21,7 +21,7 @@ socket.onOpen$.pipe(
   mergeMap(() => channel.onOpen$),
   mergeMap(() => listen$<IAppModel>(channel, 'initialize')),
 ).subscribe((initialState: IAppModel) => {
-  const store = AppModel.create(initialState)
+  const store = AppModel.create(initialState, { channel })
   render(store)
 })
 
