@@ -12,6 +12,7 @@
     "client:ut:watch": "yarn run client:ut -G --watch --watch-extensions ts"
   },
   "dependencies": {
+    "material-ui": "^1.0.0-beta.23",
     "mobx": "^3.4.1",
     "mobx-state-tree": "^1.2.1",
     "nanoid": "^1.0.1",
@@ -19,10 +20,12 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "redis": "^2.8.0",
-    "rxjs": "^5.5.2"
+    "rxjs": "^5.5.2",
+    "typeface-roboto": "^0.0.45"
   },
   "devDependencies": {
     "@types/chai": "^4.0.6",
+    "@types/material-ui": "^0.18.5",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.53",
     "@types/phoenix": "^0.0.4",
