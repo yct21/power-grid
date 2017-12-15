@@ -1,7 +1,7 @@
 import * as React from 'react'
-import
+import { Header } from 'MainMenu/layout/Header'
 
-export const MainMenu: React.SFC<IMainMenuModel> = (store: IMainMenuModel) => {
+export const MainMenu = () => {
   return (
     <div>
       { Header({}) }

@@ -1,9 +1,10 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'mobx-react'
 import { mergeMap } from 'rxjs/operators'
 import { loadParameters } from 'entry/loadParameters'
-import { AppModel, IAppModel } from 'App/model'
+import { AppModel, IAppModel } from 'App/store'
 import { App } from 'App/view'
 import { initSocket, joinChannel, listen$, Socket, Channel } from 'socket'
 import 'entry/global.css'
@@ -28,7 +29,9 @@ socket.onOpen$.pipe(
 function render (store: IAppModel) {
   ReactDOM.render(
     <AppContainer>
-      <App {...store} />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AppContainer>,
     document.getElementById('app'),
   )
