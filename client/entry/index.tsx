@@ -4,8 +4,10 @@ import { AppContainer } from 'react-hot-loader'
 import { mergeMap } from 'rxjs/operators'
 import { loadParameters } from 'entry/loadParameters'
 import { AppModel, IAppModel } from 'App/model'
+import { App } from 'App/view'
 import { initSocket, joinChannel, listen$, Socket, Channel } from 'socket'
 import 'entry/global.css'
+import 'typeface-roboto' // font
 
 const { userId, currentGameId, socketUrl} = loadParameters()
 const channelName = currentGameId ?
@@ -26,7 +28,7 @@ socket.onOpen$.pipe(
 function render (store: IAppModel) {
   ReactDOM.render(
     <AppContainer>
-      <p>Hello!</p>
+      <App {...store} />
     </AppContainer>,
     document.getElementById('app'),
   )
