@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree'
 import { Game } from 'MainMenu/GameList/Game'
-import { OnlineNum } from 'MainMenu/OnlineNum'
+import { OnlineNum } from 'MainMenu/model/OnlineNum'
 
 export const MainMenuModel = types.model({
   onlineNum: OnlineNum,

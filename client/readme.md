@@ -2,7 +2,7 @@
 
 Client application is mostly organized by feature.
 
-- entry
+- entry: put entries here since root directory is already congested.
   - index.html
   - global.css
   - index.tsx: entry of application

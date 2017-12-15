@@ -1,5 +1,5 @@
 import { types } from 'mobx-state-tree'
-import { Player } from 'MainMenu/GameList/Player'
+import { Player } from 'MainMenu/model/GameList/Player'
 
 export const Game = types.model({
   id: types.identifier(),
