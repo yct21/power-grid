@@ -9,8 +9,18 @@ function cssLoader (env) {
 
     use: [
       'style-loader',
-      { loader: 'css-loader', options: { importLoaders: 1 } },
-      { loader: 'postcss-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1,
+          modules: true,
+          sourceMap: true,
+          camelCase: true,
+          localIdentName: env.cssLocalIndentName,
+        },
+      },
+      {
+        loader: 'postcss-loader',
         options: {
           config: {
             path: 'config/client/.postcssrc'
