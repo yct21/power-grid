@@ -16,11 +16,11 @@ const HeaderOnlineNum = (onlineNum: number) => {
     width: 20,
     height: 20,
   }
-  console.log(style)
 
   return (
     <div className={style.onlineNumDiv}>
       <UserIcon {...props}/>
+      <span> {onlineNum} Online </span>
     </div>
   )
 }
@@ -28,11 +28,11 @@ const HeaderOnlineNum = (onlineNum: number) => {
 const HeaderView: React.SFC<HeaderProps> = ({ onlineNum }) => {
   return (
     <AppBar>
-      <Toolbar>
-        <Typography type='title' color='inherit'>
+      <Toolbar className={style.appHeader}>
+      <Typography type='title' color='inherit' className={style.typography}>
           Power Grid
         </Typography>
-      { HeaderOnlineNum(onlineNum) }
+       { HeaderOnlineNum(onlineNum) }
       </Toolbar>
     </AppBar>
   )

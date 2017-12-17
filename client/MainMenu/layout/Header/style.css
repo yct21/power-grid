@@ -1,4 +1,22 @@
+@import "shared/styles/colors";
+
+.appHeader {
+  background-color: $darkPrimaryColor;
+}
+
+.typography {
+  flex: 1 0 200px;
+}
+
 .onlineNumDiv {
-  flex: 1 0 50;
+  flex: 0 0 50;
   display: flex;
+
+  svg {
+    fill: #fff;
+  }
+
+  span {
+    padding-left: 3px;
+  }
 }

@@ -6,6 +6,8 @@ module.exports = {
     'postcss-import': {
       path: ['client']
     },
+    'postcss-simple-vars': {},
     'autoprefixer': {},
+    'postcss-nested': {},
   }
 }

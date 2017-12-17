@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { Header } from 'MainMenu/layout/Header'
 
-export const MainMenu = () => {
+export const MainMenu: React.SFC<{}> = () => {
   return (
     <div>
-      { Header({}) }
+      <Header />
     </div>
   )
 }
+
+MainMenu.displayName = 'MainMenu'

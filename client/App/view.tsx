@@ -6,3 +6,5 @@ export const App: React.SFC<{}> = () => {
     <MainMenu />
   )
 }
+
+App.displayName = 'App'
