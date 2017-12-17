@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@types/chai": "^4.0.6",
-    "@types/material-ui": "^0.18.5",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.53",
     "@types/phoenix": "^0.0.4",

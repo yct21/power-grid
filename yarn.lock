@@ -6,13 +6,6 @@
   version "4.0.6"
   resolved "http://registry.npm.taobao.org/@types/chai/download/@types/chai-4.0.6.tgz#9cb5a7fb7dd83be0cfcaafdbd95a2b5dd351762f"
 
-"@types/material-ui@^0.18.5":
-  version "0.18.5"
-  resolved "http://registry.npm.taobao.org/@types/material-ui/download/@types/material-ui-0.18.5.tgz#27f791226cc297f5df58ff811067fa44c5599dd3"
-  dependencies:
-    "@types/react" "*"
-    "@types/react-addons-linked-state-mixin" "*"
-
 "@types/mocha@^2.2.44":
   version "2.2.44"
   resolved "http://registry.npm.taobao.org/@types/mocha/download/@types/mocha-2.2.44.tgz#1d4a798e53f35212fd5ad4d04050620171cd5b5e"
@@ -28,12 +21,6 @@
 "@types/phoenix@^0.0.4":
   version "0.0.4"
   resolved "http://registry.npm.taobao.org/@types/phoenix/download/@types/phoenix-0.0.4.tgz#6ada6be91dfdc1fa77ed57691f92821920f71d12"
-
-"@types/react-addons-linked-state-mixin@*":
-  version "0.14.18"
-  resolved "http://registry.npm.taobao.org/@types/react-addons-linked-state-mixin/download/@types/react-addons-linked-state-mixin-0.14.18.tgz#6977ae59e19aa0ce3a5d7a9e057961aaf1afe959"
-  dependencies:
-    "@types/react" "*"
 
 "@types/react-dom@^16.0.3":
   version "16.0.3"
