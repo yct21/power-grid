@@ -8,15 +8,17 @@ defmodule PowerGridWeb.MainMenuChannel do
   """
 
   @online_number_agent PowerGrid.OnlineNum
+  @update_online_num_message "update:onlineNum"
 
   def join("MainMenu", _params, socket) do
-    update_online_num(&(&1 + 1))
-
     send(self(), :after_join)
+
     {:ok, socket}
   end
 
   def handle_info(:after_join, socket) do
+    update_online_num(&(&1 + 1), socket)
+
     push socket, "initialize", %{
       "onlineNum" => @online_number_agent.get(),
       "gameList" => %{},
@@ -25,24 +27,26 @@ defmodule PowerGridWeb.MainMenuChannel do
     {:noreply, socket}
   end
 
-  def handle_info({:update_online_num, number}, socket) do
-    broadcast! socket, "updateOnlineNum", %{"onlineNum" => number}
-
-    {:noreply, socket}
+  def terminate(_message, socket) do
+    update_online_num(&(&1 - 1), socket)
   end
 
-  def terminate(_, _) do
-    update_online_num(&(&1 - 1))
+  defp update_online_num(fun, socket) do
+    online_num = update_online_num_server(fun)
+    update_online_num_client(online_num, socket)
   end
 
-  defp update_online_num(fun) do
+  defp update_online_num_server(fun) do
     online_num_fun = fn origin_number ->
       updated_number = fun.(origin_number)
 
       {updated_number, updated_number}
     end
 
-    number = @online_number_agent.get_and_update(online_num_fun)
-    send(self(), {:update_online_num, number})
+    @online_number_agent.get_and_update(online_num_fun)
+  end
+
+  defp update_online_num_client(number, socket) do
+    broadcast_from! socket, @update_online_num_message, %{"onlineNum" => number}
   end
 end

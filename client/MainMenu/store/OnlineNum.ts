@@ -2,6 +2,10 @@ import { types, getEnv } from 'mobx-state-tree'
 import { Subscription } from 'rxjs/Subscription'
 import { Channel, listen$ } from 'socket'
 
+interface OnlineNumMessage {
+  onlineNum: number,
+}
+
 export const OnlineNum = types.model('OnlineNum', {
   count: types.number,
 }).preProcessSnapshot((snapshot: number) => ({
@@ -12,12 +16,12 @@ export const OnlineNum = types.model('OnlineNum', {
   },
 })).actions(self => {
   const channel: Channel = getEnv(self).channel
-  const onlineNum$ = listen$<number>(channel, 'update:onlineNum')
+  const onlineNum$ = listen$<OnlineNumMessage>(channel, 'update:onlineNum')
   let subscription: Subscription
 
   return {
     afterCreate () {
-      subscription = onlineNum$.subscribe((num: number) => self.updateCount(num))
+      subscription = onlineNum$.subscribe(({ onlineNum }) => self.updateCount(onlineNum))
     },
     beforeDestroy () {
       subscription.unsubscribe
