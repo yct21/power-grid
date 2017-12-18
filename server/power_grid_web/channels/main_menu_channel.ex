@@ -21,6 +21,7 @@ defmodule PowerGridWeb.MainMenuChannel do
   """
   def handle_info(:after_join, socket) do
     push socket, "initialize", %{
+      "userId" => socket.assigns[:user_id],
       "onlineNum" => @online_number_agent.get(),
       "gameList" => %{},
     }
