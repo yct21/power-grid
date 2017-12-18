@@ -1,10 +1,10 @@
 import { types } from 'mobx-state-tree'
-import { Game } from 'MainMenu/store/GameList/Game'
 import { OnlineNum } from 'MainMenu/store/OnlineNum'
+import { GameList } from 'MainMenu/store/GameList'
 
 export const MainMenuModel = types.model({
   onlineNum: OnlineNum,
-  gameList: types.map(Game),
+  gameList: GameList,
 })
 
 export type IMainMenuModel = typeof MainMenuModel.Type;

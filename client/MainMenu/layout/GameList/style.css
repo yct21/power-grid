@@ -1,0 +1,29 @@
+@import "shared/styles/colors";
+
+.game-list-paper {
+  margin-top: 30px;
+  margin: 30px 26px 0 26px;
+}
+
+.toolbar {
+  background-color: $primaryColor;
+
+  p {
+    flex: 1;
+    color: #fff;
+    font-size: 1.1rem;
+  }
+}
+
+.game-list {
+  display: flex;
+  min-height: 600px;
+  flex-direction: column;
+  justify-content: center;
+
+  .no-game-label {
+    flex: 0;
+    text-align: center;
+    color: $unavalableColor;
+  }
+}

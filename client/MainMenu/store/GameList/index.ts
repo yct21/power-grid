@@ -1,10 +1,10 @@
 import { types } from 'mobx-state-tree'
 import { Game } from 'MainMenu/store/GameList/Game'
 
-export const GameListModel = types.model({
+export const GameList = types.model({
   games: types.map(Game),
-})
+}).preProcessSnapshot(games => ({
+  games,
+}))
 
-export type IGameListModel = typeof GameListModel.Type
-
-// function initialize(games: )
+export type IGameList = typeof GameList.Type
