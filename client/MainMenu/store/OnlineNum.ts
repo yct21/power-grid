@@ -1,6 +1,7 @@
-import { types, getEnv } from 'mobx-state-tree'
+import { types } from 'mobx-state-tree'
 import { Subscription } from 'rxjs/Subscription'
 import { Channel, listen$ } from 'socket'
+import { getChannel } from 'utils/getChannel'
 
 interface OnlineNumMessage {
   onlineNum: number,
@@ -15,7 +16,7 @@ export const OnlineNum = types.model('OnlineNum', {
     self.count = num
   },
 })).actions(self => {
-  const channel: Channel = getEnv(self).channel
+  const channel: Channel = getChannel(self)
   const onlineNum$ = listen$<OnlineNumMessage>(channel, 'update:onlineNum')
   let subscription: Subscription
 
