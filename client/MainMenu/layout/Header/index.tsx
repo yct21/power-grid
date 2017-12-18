@@ -27,7 +27,7 @@ const HeaderOnlineNum = (onlineNum: number) => {
 
 const HeaderView: React.SFC<HeaderProps> = ({ onlineNum }) => {
   return (
-    <AppBar>
+    <AppBar position='static'>
       <Toolbar className={style.appHeader}>
       <Typography type='title' color='inherit' className={style.typography}>
           Power Grid
