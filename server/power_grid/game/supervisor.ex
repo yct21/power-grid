@@ -12,10 +12,18 @@ defmodule PowerGrid.Game.Supervisor do
     Supervisor.start_link(__MODULE__, [], name: __MODULE__)
   end
 
+  @doc false
+  def start_child(game) do
+    Supervisor.start_child(__MODULE__, [game])
+  end
+
   # callbacks
 
   @doc false
   def init(_) do
-    Supervisor.init([], strategy: :simple_one_for_one)
+    supervise(
+      [worker(PowerGrid.Game.Server, [])],
+      strategy: :simple_one_for_one,
+    )
   end
 end
