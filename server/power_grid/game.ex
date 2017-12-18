@@ -1,10 +1,24 @@
 defmodule PowerGrid.Game do
-  @moduledoc """
-  Module for a game board.
+  use Ecto.Schema
+  import Ecto.Changeset
+  alias PowerGrid.Game
 
-  - status: [:waiting, :running, :ended]
-  - players: [PowerGrid.Game.Player]
+  @moduledoc """
+  Ecto schema of Game
   """
 
-  defstruct [:status, :players, :board_state]
+  @primary_key {:id, Ecto.UUID, autogenerate: true}
+  schema "games" do
+    field :actions, {:array, :map}
+    field :arbiter_version, :string
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(%Game{} = game, attrs) do
+    game
+    |> cast(attrs, [:id, :actions])
+    |> validate_required([:id, :actions])
+  end
 end
