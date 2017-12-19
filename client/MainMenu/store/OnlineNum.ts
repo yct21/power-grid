@@ -7,25 +7,29 @@ interface OnlineNumMessage {
   onlineNum: number,
 }
 
-export const OnlineNum = types.model('OnlineNum', {
-  count: types.number,
-}).preProcessSnapshot((snapshot: number) => ({
-  count: snapshot,
-})).actions(self => ({
-  updateCount (num: number) {
-    self.count = num
-  },
-})).actions(self => {
-  const channel: Channel = getChannel(self)
-  const onlineNum$ = listen$<OnlineNumMessage>(channel, 'update:onlineNum')
-  let subscription: Subscription
+export const OnlineNum = types
+  .model('OnlineNum', {
+    count: types.number,
+  })
+  .preProcessSnapshot((snapshot: number) => ({
+    count: snapshot,
+  }))
+  .actions(self => ({
+    updateCount (num: number) {
+      self.count = num
+    },
+  }))
+  .actions(self => {
+    const channel: Channel = getChannel(self)
+    const onlineNum$ = listen$<OnlineNumMessage>(channel, 'update:onlineNum')
+    let subscription: Subscription
 
-  return {
-    afterCreate () {
-      subscription = onlineNum$.subscribe(({ onlineNum }) => self.updateCount(onlineNum))
-    },
-    beforeDestroy () {
-      subscription.unsubscribe
-    },
-  }
-})
+    return {
+      afterCreate () {
+        subscription = onlineNum$.subscribe(({ onlineNum }) => self.updateCount(onlineNum))
+      },
+      beforeDestroy () {
+        subscription.unsubscribe
+      },
+    }
+  })
