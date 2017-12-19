@@ -52,9 +52,18 @@ export function listen$<T> (channel: Channel, event: string): Observable<T> {
   return fromEventPattern(on, off)
 }
 
-export function push<T> (channel: Channel, event: string, message: T) {
+export function push (channel: Channel, event: string, message: object) {
   channel.phxChannel.push(event, message)
 }
+
+export function push$<T> (channel: Channel, event: string, message: object) {
+  return Observable.create((obs: Observer<T>) => {
+    channel.phxChannel.push(event, message).receive('ok', (reply: T) => {
+      obs.next(reply)
+    })
+  })
+}
+
 
 export function initSocket (url: string, userId: string, channelName: string): Socket {
   const phxSocket = new PhoenixSocket(url, { params: { userId } })
