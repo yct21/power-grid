@@ -39,16 +39,24 @@ defmodule PowerGrid.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # phoenix dependencies
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:distillery, "~> 1.5", runtime: false},
+
+      # redis
       {:redix, ">= 0.6.0"},
       {:redix_pubsub, ">= 0.4.1"},
+
+      # macro helpers
+      {:shorter_maps, "~> 2.0"},
+
+      # develop tools
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:distillery, "~> 1.5", runtime: false},
     ]
   end
 
