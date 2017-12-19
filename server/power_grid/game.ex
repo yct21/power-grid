@@ -9,6 +9,8 @@ defmodule PowerGrid.Game do
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}
   schema "games" do
+    field :status, :string
+    field :players, {:array, :map}
     field :actions, {:array, :map}
     field :arbiter_version, :string
 
@@ -18,7 +20,7 @@ defmodule PowerGrid.Game do
   @doc false
   def changeset(%Game{} = game, attrs) do
     game
-    |> cast(attrs, [:id, :actions])
-    |> validate_required([:id, :actions])
+    |> cast(attrs, [:status, :players, :actions, :arbiter_version])
+    |> validate_required([:status, :players, :actions, :arbiter_version])
   end
 end

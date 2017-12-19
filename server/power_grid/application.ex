@@ -16,15 +16,12 @@ defmodule PowerGrid.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Start the Ecto repository
       supervisor(PowerGrid.Repo, []),
-      # Start the endpoint when the application starts
       supervisor(PowerGridWeb.Endpoint, []),
-      # Start your own worker by calling: PowerGrid.Worker.start_link(arg1, arg2, arg3)
-      # worker(PowerGrid.Worker, [arg1, arg2, arg3]),
       supervisor(PowerGrid.Redis.Supervisor, []),
-      # Online Number
-      worker(PowerGrid.OnlineNum, [])
+      supervisor(PowerGrid.Game.Supervisor, []),
+      worker(PowerGrid.OnlineNum, []),
+      worker(PowerGrid.Game.List, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

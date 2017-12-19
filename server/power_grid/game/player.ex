@@ -3,5 +3,5 @@ defmodule PowerGrid.Game.Player do
   Defines struct for game players.
   """
 
-  defstruct [:id, :name, :color]
+  defstruct [:id, :name, :color, :join_time]
 end
