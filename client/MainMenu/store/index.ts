@@ -4,6 +4,7 @@ import { GameList } from 'MainMenu/store/GameList'
 
 export const MainMenuModel = types.model({
   userId: types.string,
+  userName: types.maybe(types.string),
   onlineNum: OnlineNum,
   gameList: GameList,
 })

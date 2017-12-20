@@ -10,7 +10,7 @@ import { initSocket, joinChannel, listen$, Socket, Channel } from 'socket'
 import 'entry/global.css'
 import 'typeface-roboto' // font
 
-const { userId, currentGameId, socketUrl} = loadParameters()
+const { userId, userName, currentGameId, socketUrl} = loadParameters()
 const channelName = currentGameId ?
   `GameBoard-${currentGameId}` :
   `MainMenu`
@@ -22,7 +22,7 @@ socket.onOpen$.pipe(
   mergeMap(() => channel.onOpen$),
   mergeMap(() => listen$<IAppModel>(channel, 'initialize')),
 ).subscribe((initialState: IAppModel) => {
-  const store = AppModel.create(initialState, { channel })
+  const store = AppModel.create({ ...initialState, userId, userName }, { channel })
   render(store)
 })
 
