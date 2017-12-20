@@ -56,7 +56,7 @@ export function push (channel: Channel, event: string, message: object) {
   channel.phxChannel.push(event, message)
 }
 
-export function push$<T> (channel: Channel, event: string, message: object) {
+export function push$<T> (channel: Channel, event: string, message: object): Observable<T> {
   return Observable.create((obs: Observer<T>) => {
     channel.phxChannel.push(event, message).receive('ok', (reply: T) => {
       obs.next(reply)

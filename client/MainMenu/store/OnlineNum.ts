@@ -29,7 +29,7 @@ export const OnlineNum = types
         subscription = onlineNum$.subscribe(({ onlineNum }) => self.updateCount(onlineNum))
       },
       beforeDestroy () {
-        subscription.unsubscribe
+        subscription.unsubscribe()
       },
     }
   })
