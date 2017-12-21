@@ -16,12 +16,16 @@ interface GameListProps {
   gameList: IGameList,
 }
 
-const GameListToolbar = () => {
+const GameListToolbar = (gameList: IGameList) => {
+  const createGame = () => {
+    gameList.createGame()
+  }
+
   return (
     <Toolbar className={style.toolbar}>
       <Typography>Games</Typography>
-      <Button raised mini>
-        <AddIcon />
+      <Button fab mini>
+        <AddIcon onClick={createGame}/>
       </Button>
     </Toolbar>
   )
@@ -49,7 +53,7 @@ const GameListView: React.SFC<GameListProps> = ({ gameList }) => {
 
   return (
     <Paper className={style.gameListPaper}>
-      { GameListToolbar() }
+      { GameListToolbar(gameList) }
       <Divider />
       { GameListTable(gameList) }
     </Paper>

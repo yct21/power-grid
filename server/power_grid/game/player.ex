@@ -1,7 +1,14 @@
 defmodule PowerGrid.Game.Player do
+  use Ecto.Schema
+
   @moduledoc """
-  Defines struct for game players.
+  Defines schema for game players.
   """
 
-  defstruct [:id, :name, :color, :join_time]
+  @primary_key {:id, :string, autogenerate: false}
+  embedded_schema do
+    field :name, :string
+    field :color, :string
+    field :join_at, :utc_datetime
+  end
 end

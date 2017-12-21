@@ -1,5 +1,9 @@
 defmodule PowerGridWeb.MainMenuChannel do
+  import ShorterMaps
   use PowerGridWeb, :channel
+  alias PowerGrid.Game
+  alias PowerGrid.Game.Player
+
   @moduledoc """
   Channel for users in main menu.
 
@@ -14,6 +18,12 @@ defmodule PowerGridWeb.MainMenuChannel do
     send(self(), :after_join)
 
     {:ok, socket}
+  end
+
+  def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
+    PowerGrid.Game.List.create_game({socket.assigns[:user_id], player_name, color})
+
+    {:reply, :ok, socket}
   end
 
   @doc """

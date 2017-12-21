@@ -10,7 +10,7 @@ defmodule PowerGrid.Game do
   @primary_key {:id, Ecto.UUID, autogenerate: true}
   schema "games" do
     field :status, :string
-    field :players, {:array, :map}
+    embeds_many :players, PowerGrid.Game.Player
     field :actions, {:array, :map}
     field :arbiter_version, :string
 
