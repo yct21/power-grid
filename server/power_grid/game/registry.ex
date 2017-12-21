@@ -1,10 +1,10 @@
-defmodule PowerGrid.Game.List do
+defmodule PowerGrid.Game.Registry do
   use GenServer
   alias PowerGrid.Game
   alias PowerGrid.Game.Player
 
   @moduledoc """
-  GenServer that contains all the games.
+  GenServer that contains maps of games server and its pid.
   """
 
   # api
@@ -13,6 +13,17 @@ defmodule PowerGrid.Game.List do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
+  def get do
+    GenServer.call(__MODULE__, :get_all)
+  end
+
+  @doc """
+  Create a new game
+
+  - insert into Repo
+  - start link a new Game.Server
+  - put its pid into game_list
+  """
   def create_game(game) do
     GenServer.call(__MODULE__, {:create_game, game})
   end
@@ -33,13 +44,10 @@ defmodule PowerGrid.Game.List do
     {:noreply, game_list}
   end
 
-  @doc """
-  Create a new game
+  def handle_call(:get_all, game_list) do
+    {:reply, game_list, game_list}
+  end
 
-  - insert into Repo
-  - start link a new Game.Server
-  - put its pid into game_list
-  """
   def handle_call({:create_game, {player_id, player_name, color}}, _from, game_list) do
     game_owner = %Player{
       id: player_id,

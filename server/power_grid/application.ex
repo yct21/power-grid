@@ -21,7 +21,7 @@ defmodule PowerGrid.Application do
       supervisor(PowerGrid.Redis.Supervisor, []),
       supervisor(PowerGrid.Game.Supervisor, []),
       worker(PowerGrid.OnlineNum, []),
-      worker(PowerGrid.Game.List, []),
+      worker(PowerGrid.Game.Registry, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

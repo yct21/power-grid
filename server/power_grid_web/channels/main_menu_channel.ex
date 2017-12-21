@@ -3,6 +3,7 @@ defmodule PowerGridWeb.MainMenuChannel do
   use PowerGridWeb, :channel
   alias PowerGrid.Game
   alias PowerGrid.Game.Player
+  alias PowerGrid.Game.Registry, as: GameRegistry
 
   @moduledoc """
   Channel for users in main menu.
@@ -21,7 +22,7 @@ defmodule PowerGridWeb.MainMenuChannel do
   end
 
   def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
-    PowerGrid.Game.List.create_game({socket.assigns[:user_id], player_name, color})
+    GameRegistry.create_game({socket.assigns[:user_id], player_name, color})
 
     {:reply, :ok, socket}
   end
@@ -30,6 +31,8 @@ defmodule PowerGridWeb.MainMenuChannel do
   send initialize data to user
   """
   def handle_info(:after_join, socket) do
+    game_list = GameRegistry.get()
+
     push socket, "initialize", %{
       "onlineNum" => @online_number_agent.get(),
       "gameList" => %{},
