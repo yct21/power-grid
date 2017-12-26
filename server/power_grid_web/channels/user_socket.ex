@@ -2,7 +2,7 @@ defmodule PowerGridWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "MainMenu", PowerGridWeb.MainMenuChannel
+  channel "lobby", PowerGridWeb.LobbyChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

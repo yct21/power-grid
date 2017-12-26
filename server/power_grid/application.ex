@@ -6,7 +6,9 @@ defmodule PowerGrid.Application do
 
   - Repo (Persistence)
   - Endpoint (Web)
-  - Redis.Supervisor (PubSub with game logic)
+  - PubSub (Game - Channel)
+  - Game Supervisor (supervise game servers)
+  - Lobby (online number and game list)
   """
 
   # See https://hexdocs.pm/elixir/Application.html
@@ -18,16 +20,33 @@ defmodule PowerGrid.Application do
     children = [
       supervisor(PowerGrid.Repo, []),
       supervisor(PowerGridWeb.Endpoint, []),
-      supervisor(PowerGrid.Redis.Supervisor, []),
-      supervisor(PowerGrid.Game.Supervisor, []),
-      worker(PowerGrid.OnlineNum, []),
-      worker(PowerGrid.Game.Registry, []),
+      supervisor(Phoenix.PubSub.PG2, [:power_grid, []]),
+      game_supervisor(),
+      worker(PowerGrid.Lobby, []),
+      worker(Task, [&load_games/0], restart: :temporary),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: PowerGrid.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp game_supervisor() do
+    import Supervisor.Spec
+
+    children = [
+      worker(PowerGrid.Game.Server, [], restart: :transient),
+    ]
+    opts = [strategy: :simple_one_for_one, name: PowerGrid.Game.Supervisor]
+    supervisor(Supervisor, [children, opts])
+  end
+
+  defp load_games() do
+    initial_games = PowerGrid.Repo.all(PowerGrid.Storage.Game)
+    Enum.each initial_games, fn (game) ->
+      PowerGrid.Game.Server.start(game)
+    end
   end
 
   # Tell Phoenix to update the endpoint configuration

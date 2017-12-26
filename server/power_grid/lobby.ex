@@ -1,20 +1,29 @@
-defmodule PowerGrid.Game.Registry do
+defmodule PowerGrid.Lobby do
   use GenServer
-  alias PowerGrid.Game
-  alias PowerGrid.Game.Player
+  alias PowerGrid.Storage.Game
+  alias PowerGrid.Storage.Player
 
   @moduledoc """
-  GenServer that contains maps of games server and its pid.
+  This module keeps track of game list and online number.
+
+  - when application starts, it starts all alive games
+  - it starts a registry for game server
+  - it listens to status change of games
+  - it sends its list to user entering lobby
   """
 
-  # api
+  ### client ###
 
-  def start_link do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  @doc false
+  def start_link() do
+    GenServer.start_link(__MODULE__, [])
   end
 
-  def get do
-    GenServer.call(__MODULE__, :get_all)
+  @doc """
+  Get status of all games.
+  """
+  def get() do
+
   end
 
   @doc """
@@ -28,23 +37,14 @@ defmodule PowerGrid.Game.Registry do
     GenServer.call(__MODULE__, {:create_game, game})
   end
 
-  # callbacks
+  ### server ###
 
-  def init(_) do
+  def init() do
     {:ok, %{}}
   end
 
-  def handle_info(:after_init) do
-    initial_games = PowerGrid.Repo.all(Game)
-    game_list = Enum.reduce initial_games, %{}, fn (game, game_list) ->
-      pid = PowerGrid.Game.Supervisor.start_child(game)
-      Map.put game_list, game.id, pid
-    end
-
-    {:noreply, game_list}
-  end
-
-  def handle_call(:get_all, game_list) do
+  @doc "Get all {game_id, pid} in registry"
+  def handle_call(:all, game_list) do
     {:reply, game_list, game_list}
   end
 

@@ -1,4 +1,4 @@
-defmodule PowerGridWeb.MainMenuChannel do
+defmodule PowerGridWeb.LobbyChannel do
   import ShorterMaps
   use PowerGridWeb, :channel
   alias PowerGrid.Game
@@ -14,7 +14,7 @@ defmodule PowerGridWeb.MainMenuChannel do
 
   @online_number_agent PowerGrid.OnlineNum
 
-  def join("MainMenu", _params, socket) do
+  def join("lobby", _params, socket) do
     @online_number_agent.join
     send(self(), :after_join)
 
