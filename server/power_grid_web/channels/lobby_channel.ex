@@ -15,11 +15,11 @@ defmodule PowerGridWeb.LobbyChannel do
     {:ok, socket}
   end
 
-  def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
-    GameRegistry.create_game({socket.assigns[:user_id], player_name, color})
+  # def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
+  #   GameRegistry.create_game({socket.assigns[:user_id], player_name, color})
 
-    {:reply, :ok, socket}
-  end
+  #   {:reply, :ok, socket}
+  # end
 
   @doc """
   Send initialize data to user
@@ -27,7 +27,7 @@ defmodule PowerGridWeb.LobbyChannel do
   def handle_info({:after_join, online_num, games}, socket) do
     push socket, "initialize", %{
       "onlineNum" => online_num,
-      "games" => games,
+      "gameList" => games,
     }
 
     {:noreply, socket}

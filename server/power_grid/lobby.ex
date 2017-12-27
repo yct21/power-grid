@@ -19,7 +19,7 @@ defmodule PowerGrid.Lobby do
 
   @doc false
   def start_link() do
-    GenServer.start_link(__MODULE__, [])
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
   @doc """
@@ -53,7 +53,7 @@ defmodule PowerGrid.Lobby do
 
   ### server ###
 
-  def init() do
+  def init(_) do
     initial_state = {
       0, # online_num
       Map.new() # games
@@ -62,43 +62,43 @@ defmodule PowerGrid.Lobby do
     {:ok, initial_state}
   end
 
-  def handle_call({:create_game, {player_id, player_name, color}}, _from, game_list) do
-    game_owner = %Player{
-      id: player_id,
-      name: player_name,
-      color: color,
-      join_at: DateTime.utc_now()
-    }
-    game = %Game{
-      status: "waiting",
-      players: [game_owner],
-      actions: [],
-      arbiter_version: "0.0.0",
-    }
-    PowerGrid.Repo.insert!(game)
-    pid = PowerGrid.Game.Supervisor.start_child(game)
-    updated_game_list = Map.put game_list, game.id, pid
+  # def handle_call({:create_game, {player_id, player_name, color}}, _from, game_list) do
+  #   game_owner = %Player{
+  #     id: player_id,
+  #     name: player_name,
+  #     color: color,
+  #     join_at: DateTime.utc_now()
+  #   }
+  #   game = %Game{
+  #     status: "waiting",
+  #     players: [game_owner],
+  #     actions: [],
+  #     arbiter_version: "0.0.0",
+  #   }
+  #   PowerGrid.Repo.insert!(game)
+  #   pid = PowerGrid.Game.Supervisor.start_child(game)
+  #   updated_game_list = Map.put game_list, game.id, pid
 
-    {:reply, :ok, updated_game_list}
-  end
+  #   {:reply, :ok, updated_game_list}
+  # end
 
   def handle_cast({:user_join, channel_pid}, {online_num, games}) do
     updated_online_num = online_num + 1
 
     send(channel_pid, {:after_join, updated_online_num, games})
-    broadcast({:update_online_num, updated_online_num})
+    broadcast!("onlineNum:update", %{"onlineNum" => updated_online_num})
 
-    {updated_online_num, games}
+    {:noreply, {updated_online_num, games}}
   end
 
   def handle_cast(:user_leave, {online_num, games}) do
-    broadcast({:update_online_num, online_num - 1})
-    {online_num - 1, games}
+    broadcast!("onlineNum:update", %{"onlineNum" => online_num - 1})
+    {:noreply, {online_num - 1, games}}
   end
 
   ### helpers ###
 
-  defp broadcast(message) do
-    PubSub.broadcast(:power_grid, "lobby", message)
+  defp broadcast!(event, message) do
+    PowerGridWeb.Endpoint.broadcast!("lobby", event, message)
   end
 end

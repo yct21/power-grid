@@ -12,8 +12,8 @@ import 'typeface-roboto' // font
 
 const { userId, userName, currentGameId, socketUrl} = loadParameters()
 const channelName = currentGameId ?
-  `Game:${currentGameId}` :
-  `Lobby`
+  `game:${currentGameId}` :
+  `lobby`
 
 const socket: Socket = initSocket(socketUrl, userId, channelName)
 const channel: Channel = joinChannel(socket, channelName)
