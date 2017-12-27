@@ -1,5 +1,6 @@
 defmodule PowerGrid.Lobby do
   use GenServer
+  import ShorterMaps
   alias Phoenix.PubSub
   alias PowerGrid.Storage.Game
   alias PowerGrid.Storage.Player
@@ -54,15 +55,15 @@ defmodule PowerGrid.Lobby do
   ### server ###
 
   def init(_) do
-    initial_state = {
-      0, # online_num
-      Map.new() # games
+    initial_state = %{
+      online_num: 0,
+      games: Map.new(),
     }
 
     {:ok, initial_state}
   end
 
-  # def handle_call({:create_game, {player_id, player_name, color}}, _from, game_list) do
+  # def handle_call({:create_game, {player_id, player_name, color}}, _from, ~M{games} = state) do
   #   game_owner = %Player{
   #     id: player_id,
   #     name: player_name,
@@ -82,18 +83,18 @@ defmodule PowerGrid.Lobby do
   #   {:reply, :ok, updated_game_list}
   # end
 
-  def handle_cast({:user_join, channel_pid}, {online_num, games}) do
+  def handle_cast({:user_join, channel_pid}, ~M{online_num, games} = state) do
     updated_online_num = online_num + 1
 
     send(channel_pid, {:after_join, updated_online_num, games})
     broadcast!("onlineNum:update", %{"onlineNum" => updated_online_num})
 
-    {:noreply, {updated_online_num, games}}
+    {:noreply, %{state | online_num: updated_online_num}}
   end
 
-  def handle_cast(:user_leave, {online_num, games}) do
+  def handle_cast(:user_leave, ~M{online_num} = state) do
     broadcast!("onlineNum:update", %{"onlineNum" => online_num - 1})
-    {:noreply, {online_num - 1, games}}
+    {:noreply, %{state | online_num: online_num - 1}}
   end
 
   ### helpers ###
