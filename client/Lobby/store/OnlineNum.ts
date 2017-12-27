@@ -21,7 +21,7 @@ export const OnlineNum = types
   }))
   .actions(self => {
     const channel: Channel = getChannel(self)
-    const onlineNum$ = listen$<OnlineNumMessage>(channel, 'update:onlineNum')
+    const onlineNum$ = listen$<OnlineNumMessage>(channel, 'onlineNum:update')
     let subscription: Subscription
 
     return {

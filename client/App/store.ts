@@ -1,4 +1,4 @@
-import { MainMenuModel } from 'MainMenu/store'
+import { LobbyStore } from 'Lobby/store'
 
-export const AppModel = MainMenuModel
-export type IAppModel = typeof AppModel.Type
+export const AppStore = LobbyStore
+export type IAppStore = typeof AppStore.Type

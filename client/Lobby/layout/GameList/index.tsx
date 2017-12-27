@@ -6,11 +6,11 @@ import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import AddIcon from 'material-ui-icons/Add'
-import { IMainMenuModel } from 'MainMenu/store'
-// import { IGame } from 'MainMenu/store/GameList/Game'
-import { IGameList } from 'MainMenu/store/GameList'
+import { ILobbyStore } from 'Lobby/store'
+// import { IGame } from 'Lobby/store/GameList/Game'
+import { IGameList } from 'Lobby/store/GameList'
 import { injectStore } from 'utils/injectStore'
-import * as style from 'MainMenu/layout/GameList/style.css'
+import * as style from 'Lobby/layout/GameList/style.css'
 
 interface GameListProps {
   gameList: IGameList,
@@ -60,7 +60,7 @@ const GameListView: React.SFC<GameListProps> = ({ gameList }) => {
   )
 }
 
-function mapStore (store: IMainMenuModel): GameListProps {
+function mapStore (store: ILobbyStore): GameListProps {
   return {
     gameList: store.gameList
   }

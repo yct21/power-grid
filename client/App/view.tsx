@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { MainMenu } from 'MainMenu/view'
+import { Lobby } from 'Lobby/view'
 
 export const App: React.SFC<{}> = () => {
   return (
-    <MainMenu />
+    <Lobby />
   )
 }
 

@@ -2,7 +2,7 @@
 import { Subscription } from 'rxjs/Subscription'
 // import { tap } from 'rxjs/operators/tap'
 import { types, getParent } from 'mobx-state-tree'
-import { Game, IGame } from 'MainMenu/store/GameList/Game'
+import { Game, IGame } from 'Lobby/store/GameList/Game'
 import { Channel, push$, listen$ } from 'socket'
 import { getChannel } from 'utils/getChannel'
 import { toggleColor } from 'shared/models/Color'

@@ -3,7 +3,7 @@ defmodule PowerGridWeb.LobbyChannel do
   alias PowerGrid.Lobby
 
   @moduledoc """
-  Channel for users in main menu.
+  Channel for users in lobby.
 
   - refresh online number
   - refresh game list

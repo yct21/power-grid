@@ -2,10 +2,10 @@ import * as React from 'react'
 import AppBar from 'material-ui/AppBar'
 import Typography from 'material-ui/Typography'
 import Toolbar from 'material-ui/Toolbar'
-import { UserIcon } from 'Icons/UserIcon'
-import { IMainMenuModel } from 'MainMenu/store'
+import { UserIcon } from 'icons/UserIcon'
+import { ILobbyStore } from 'Lobby/store'
 import { injectStore } from 'utils/injectStore'
-import * as style from 'MainMenu/layout/Header/style.css'
+import * as style from 'Lobby/layout/Header/style.css'
 
 interface HeaderProps {
   onlineNum: number,
@@ -38,7 +38,7 @@ const HeaderView: React.SFC<HeaderProps> = ({ onlineNum }) => {
   )
 }
 
-function mapStore (store: IMainMenuModel): HeaderProps {
+function mapStore (store: ILobbyStore): HeaderProps {
   return {
     onlineNum: store.onlineNum.count
   }
