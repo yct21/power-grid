@@ -1,5 +1,6 @@
 defmodule PowerGrid.Lobby do
   use GenServer
+  alias Phoenix.PubSub
   alias PowerGrid.Storage.Game
   alias PowerGrid.Storage.Player
 
@@ -10,6 +11,8 @@ defmodule PowerGrid.Lobby do
   - it starts a registry for game server
   - it listens to status change of games
   - it sends its list to user entering lobby
+
+  state: {online_num, games}
   """
 
   ### client ###
@@ -20,10 +23,21 @@ defmodule PowerGrid.Lobby do
   end
 
   @doc """
-  Get status of all games.
-  """
-  def get() do
+  User joins lobby channel:
 
+  - subscribe the lobby topic
+  - tell lobby to update its online_num and send the user initial data
+  """
+  def user_join(channel_pid) do
+    PubSub.subscribe(:power_grid, "lobby")
+    GenServer.cast(__MODULE__, {:user_join, channel_pid})
+  end
+
+  @doc """
+  User leaves lobby channel
+  """
+  def user_leave() do
+    GenServer.cast(__MODULE__, :user_leave)
   end
 
   @doc """
@@ -34,18 +48,18 @@ defmodule PowerGrid.Lobby do
   - put its pid into game_list
   """
   def create_game(game) do
-    GenServer.call(__MODULE__, {:create_game, game})
+    GenServer.cast(__MODULE__, {:create_game, game})
   end
 
   ### server ###
 
   def init() do
-    {:ok, %{}}
-  end
+    initial_state = {
+      0, # online_num
+      Map.new() # games
+    }
 
-  @doc "Get all {game_id, pid} in registry"
-  def handle_call(:all, game_list) do
-    {:reply, game_list, game_list}
+    {:ok, initial_state}
   end
 
   def handle_call({:create_game, {player_id, player_name, color}}, _from, game_list) do
@@ -66,5 +80,25 @@ defmodule PowerGrid.Lobby do
     updated_game_list = Map.put game_list, game.id, pid
 
     {:reply, :ok, updated_game_list}
+  end
+
+  def handle_cast({:user_join, channel_pid}, {online_num, games}) do
+    updated_online_num = online_num + 1
+
+    send(channel_pid, {:after_join, updated_online_num, games})
+    broadcast({:update_online_num, updated_online_num})
+
+    {updated_online_num, games}
+  end
+
+  def handle_cast(:user_leave, {online_num, games}) do
+    broadcast({:update_online_num, online_num - 1})
+    {online_num - 1, games}
+  end
+
+  ### helpers ###
+
+  defp broadcast(message) do
+    PubSub.broadcast(:power_grid, "lobby", message)
   end
 end

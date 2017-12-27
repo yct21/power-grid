@@ -1,9 +1,10 @@
 defmodule PowerGridWeb.LobbyChannel do
   import ShorterMaps
   use PowerGridWeb, :channel
-  alias PowerGrid.Game
-  alias PowerGrid.Game.Player
-  alias PowerGrid.Game.Registry, as: GameRegistry
+  alias Phoenix.PubSub
+  alias PowerGrid.Storage.Game
+  alias PowerGrid.Storage.Player
+  alias PowerGrid.Lobby
 
   @moduledoc """
   Channel for users in main menu.
@@ -12,11 +13,8 @@ defmodule PowerGridWeb.LobbyChannel do
   - refresh game list
   """
 
-  @online_number_agent PowerGrid.OnlineNum
-
   def join("lobby", _params, socket) do
-    @online_number_agent.join
-    send(self(), :after_join)
+    Lobby.user_join(self())
 
     {:ok, socket}
   end
@@ -28,21 +26,18 @@ defmodule PowerGridWeb.LobbyChannel do
   end
 
   @doc """
-  send initialize data to user
+  Send initialize data to user
   """
-  def handle_info(:after_join, socket) do
-    game_list = GameRegistry.get()
-
+  def handle_info({:after_join, online_num, games}, socket) do
     push socket, "initialize", %{
-      "onlineNum" => @online_number_agent.get(),
-      "gameList" => %{},
+      "onlineNum" => online_num,
+      "games" => games,
     }
 
     {:noreply, socket}
   end
 
   def terminate(_message, _socket) do
-    @online_number_agent.leave
+    PubSub.broadcast(:power_grid, "user:leave")
   end
-
 end
