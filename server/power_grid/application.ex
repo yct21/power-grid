@@ -36,16 +36,16 @@ defmodule PowerGrid.Application do
     import Supervisor.Spec
 
     children = [
-      worker(PowerGrid.Game.Server, [], restart: :transient),
+      worker(PowerGrid.GameServer, [], restart: :transient),
     ]
-    opts = [strategy: :simple_one_for_one, name: PowerGrid.Game.Supervisor]
+    opts = [strategy: :simple_one_for_one, name: PowerGrid.GameSupervisor]
     supervisor(Supervisor, [children, opts])
   end
 
   defp load_games() do
     initial_games = PowerGrid.Repo.all(PowerGrid.Storage.Game)
     Enum.each initial_games, fn (game) ->
-      PowerGrid.Game.Server.start(game)
+      PowerGrid.GameServer.start(game)
     end
   end
 

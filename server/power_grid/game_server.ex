@@ -1,17 +1,17 @@
-defmodule PowerGrid.Game.Server do
+defmodule PowerGrid.GameServer do
   use GenServer
   alias PowerGrid.Storage.Game
   alias PowerGrid.Storage.Player
 
   @moduledoc """
-  GenServer for an active.
+  GenServer for an active game.
   """
 
   ### client ###
 
   @doc false
   def start(game) do
-    Supervisor.start_child(PowerGrid.Game.Supervisor, [game])
+    Supervisor.start_child(PowerGrid.GameSupervisor, [game])
   end
 
   @doc false
