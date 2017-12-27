@@ -1,9 +1,5 @@
 defmodule PowerGridWeb.LobbyChannel do
-  import ShorterMaps
   use PowerGridWeb, :channel
-  alias Phoenix.PubSub
-  alias PowerGrid.Storage.Game
-  alias PowerGrid.Storage.Player
   alias PowerGrid.Lobby
 
   @moduledoc """
@@ -37,7 +33,10 @@ defmodule PowerGridWeb.LobbyChannel do
     {:noreply, socket}
   end
 
+  @doc """
+  When user socket lost connect for whatever reason
+  """
   def terminate(_message, _socket) do
-    PubSub.broadcast(:power_grid, "user:leave")
+    Lobby.user_leave()
   end
 end
