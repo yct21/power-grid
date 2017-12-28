@@ -1,5 +1,6 @@
 defmodule PowerGridWeb.LobbyChannel do
   use PowerGridWeb, :channel
+  import ShorterMaps
   alias PowerGrid.Lobby
 
   @moduledoc """
@@ -10,21 +11,21 @@ defmodule PowerGridWeb.LobbyChannel do
   """
 
   def join("lobby", _params, socket) do
-    Lobby.user_join(self())
+    Lobby.enter_lobby(self())
 
     {:ok, socket}
   end
 
-  # def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
-  #   GameRegistry.create_game({socket.assigns[:user_id], player_name, color})
+  def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
+    Lobby.create_game({socket.assigns[:user_id], player_name, color})
 
-  #   {:reply, :ok, socket}
-  # end
+    {:reply, :ok, socket}
+  end
 
   @doc """
   Send initialize data to user
   """
-  def handle_info({:after_join, online_num, games}, socket) do
+  def handle_info({:after_join, ~M{online_num, games}}, socket) do
     push socket, "initialize", %{
       "onlineNum" => online_num,
       "gameList" => games,
@@ -37,6 +38,6 @@ defmodule PowerGridWeb.LobbyChannel do
   When user socket lost connect for whatever reason
   """
   def terminate(_message, _socket) do
-    Lobby.user_leave()
+    Lobby.leave_lobby()
   end
 end
