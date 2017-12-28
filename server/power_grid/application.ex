@@ -20,7 +20,7 @@ defmodule PowerGrid.Application do
     children = [
       supervisor(PowerGrid.Repo, []),
       supervisor(PowerGridWeb.Endpoint, []),
-      supervisor(Phoenix.PubSub.PG2, [:power_grid, []]),
+      # supervisor(Phoenix.PubSub.PG2, [:power_grid, []]),
       game_supervisor(),
       worker(PowerGrid.Lobby, []),
       worker(Task, [&load_games/0], restart: :temporary),
