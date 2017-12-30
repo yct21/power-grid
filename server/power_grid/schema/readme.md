@@ -1,4 +1,4 @@
-# server/power_grid/storage
+# server/power_grid/schema
 
 Here defines Ecto schemas for `Game` and `Player`.
 

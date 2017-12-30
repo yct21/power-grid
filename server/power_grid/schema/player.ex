@@ -1,4 +1,4 @@
-defmodule PowerGrid.Storage.Player do
+defmodule PowerGrid.Schema.Player do
   use Ecto.Schema
 
   @moduledoc """
