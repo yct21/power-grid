@@ -47,6 +47,9 @@ defmodule PowerGrid.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
 
+      # utilities
+      {:uuid, "~> 1.1"},
+
       # redis
       {:redix, ">= 0.6.0"},
       {:redix_pubsub, ">= 0.4.1"},
