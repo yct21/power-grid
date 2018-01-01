@@ -2,7 +2,7 @@
 import { Subscription } from 'rxjs/Subscription'
 // import { tap } from 'rxjs/operators/tap'
 import { types, getParent } from 'mobx-state-tree'
-import { Game, IGame } from 'Lobby/store/GameList/Game'
+import { Game, IGame } from 'Lobby/store/GameMap/Game'
 import { Channel, push$, listen$ } from 'socket'
 import { getChannel } from 'utils/getChannel'
 import { toggleColor } from 'shared/models/Color'
@@ -15,12 +15,17 @@ import { toggleColor } from 'shared/models/Color'
 // toggle colors
 // sort game
 
-export const GameList = types
-  .model({
+export const GameMap = types
+  .model('GameMap', {
     games: types.map(Game),
   })
   .preProcessSnapshot(games => ({
     games,
+  }))
+  .views(self => ({
+    get gameList(): IGame[] {
+      return self.games.values()
+    },
   }))
   .actions(self => {
     // new game
@@ -60,4 +65,4 @@ export const GameList = types
     }
   })
 
-export type IGameList = typeof GameList.Type
+export type IGameMap = typeof GameMap.Type

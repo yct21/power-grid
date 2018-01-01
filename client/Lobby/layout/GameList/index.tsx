@@ -7,18 +7,18 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import AddIcon from 'material-ui-icons/Add'
 import { ILobbyStore } from 'Lobby/store'
-// import { IGame } from 'Lobby/store/GameList/Game'
-import { IGameList } from 'Lobby/store/GameList'
+import { IGameMap } from 'Lobby/store/GameMap'
+import { IGame } from 'Lobby/store/GameMap/Game'
 import { injectStore } from 'utils/injectStore'
 import * as style from 'Lobby/layout/GameList/style.css'
 
 interface GameListProps {
-  gameList: IGameList,
+  games: IGameMap,
 }
 
-const GameListToolbar = (gameList: IGameList) => {
+const GameListToolbar = (games: IGameMap) => {
   const createGame = () => {
-    gameList.createGame()
+    games.createGame()
   }
 
   return (
@@ -31,8 +31,9 @@ const GameListToolbar = (gameList: IGameList) => {
   )
 }
 
-const GameListTable = (gameList: IGameList) => {
-  if (gameList.games.size === 0) {
+const GameListTable = (games: IGameMap) => {
+  const gameList: IGame[] = games.gameList
+  if (gameList.length === 0) {
     return (
       <div className={style.gameList}>
         <p className={style.noGameLabel}>No Games Found</p>
@@ -49,20 +50,19 @@ const GameListTable = (gameList: IGameList) => {
   }
 }
 
-const GameListView: React.SFC<GameListProps> = ({ gameList }) => {
-
+const GameListView: React.SFC<GameListProps> = ({ games }) => {
   return (
     <Paper className={style.gameListPaper}>
-      { GameListToolbar(gameList) }
+      { GameListToolbar(games) }
       <Divider />
-      { GameListTable(gameList) }
+      { GameListTable(games) }
     </Paper>
   )
 }
 
 function mapStore (store: ILobbyStore): GameListProps {
   return {
-    gameList: store.gameList
+    games: store.games,
   }
 }
 
