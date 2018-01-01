@@ -23,7 +23,7 @@ defmodule PowerGrid.Application do
       # supervisor(Phoenix.PubSub.PG2, [:power_grid, []]),
       game_supervisor(),
       worker(PowerGrid.Lobby, []),
-      worker(Task, [&load_games/0], restart: :temporary),
+      # worker(PowerGrid.Task.LoadGames, restart: :temporary),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -40,13 +40,6 @@ defmodule PowerGrid.Application do
     ]
     opts = [strategy: :simple_one_for_one, name: PowerGrid.GameSupervisor]
     supervisor(Supervisor, [children, opts])
-  end
-
-  defp load_games() do
-    initial_games = PowerGrid.Repo.all(PowerGrid.Storage.Game)
-    Enum.each initial_games, fn (game) ->
-      PowerGrid.GameServer.start(game)
-    end
   end
 
   # Tell Phoenix to update the endpoint configuration
