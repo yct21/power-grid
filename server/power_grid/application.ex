@@ -6,7 +6,9 @@ defmodule PowerGrid.Application do
 
   - Repo (Persistence)
   - Endpoint (Web)
-  - Redis.Supervisor (PubSub with game logic)
+  - PubSub (Game - Channel)
+  - Game Supervisor (supervise game servers)
+  - Lobby (online number and game list)
   """
 
   # See https://hexdocs.pm/elixir/Application.html
@@ -16,21 +18,28 @@ defmodule PowerGrid.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Start the Ecto repository
       supervisor(PowerGrid.Repo, []),
-      # Start the endpoint when the application starts
       supervisor(PowerGridWeb.Endpoint, []),
-      # Start your own worker by calling: PowerGrid.Worker.start_link(arg1, arg2, arg3)
-      # worker(PowerGrid.Worker, [arg1, arg2, arg3]),
-      supervisor(PowerGrid.Redis.Supervisor, []),
-      # Online Number
-      worker(PowerGrid.OnlineNum, [])
+      # supervisor(Phoenix.PubSub.PG2, [:power_grid, []]),
+      game_supervisor(),
+      worker(PowerGrid.Lobby, []),
+      # worker(PowerGrid.Task.LoadGames, restart: :temporary),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: PowerGrid.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp game_supervisor() do
+    import Supervisor.Spec
+
+    children = [
+      worker(PowerGrid.GameServer, [], restart: :transient),
+    ]
+    opts = [strategy: :simple_one_for_one, name: PowerGrid.GameSupervisor]
+    supervisor(Supervisor, [children, opts])
   end
 
   # Tell Phoenix to update the endpoint configuration

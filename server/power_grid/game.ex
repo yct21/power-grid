@@ -1,10 +1,16 @@
 defmodule PowerGrid.Game do
   @moduledoc """
-  Module for a game board.
-
-  - status: [:waiting, :running, :ended]
-  - players: [PowerGrid.Game.Player]
+  A `Game` is the primary data structure used to keep track of PowerGrid concerns.
   """
 
-  defstruct [:status, :players, :board_state]
+  alias PowerGrid.Schema.Game, as: SchemaGame
+
+  defstruct [:id, :map, :players, :status, :actions, :arbiter_version]
+
+  @doc """
+  Create a game with game schema
+  """
+  def create(%SchemaGame{} = game) do
+
+  end
 end

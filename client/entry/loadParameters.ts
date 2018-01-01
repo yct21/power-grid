@@ -5,6 +5,7 @@ const generate =  require('nanoid/generate')
 interface Parameters {
   // user data from local storage or url query
   userId: string,
+  userName: string | null,
   currentGameId: string | null,
 
   // websocket url from webpack define plugin
@@ -38,11 +39,14 @@ export function loadParameters (): Parameters {
     localStorage.getItem('userId') ||
     generateUserId()
 
+  const userName = localStorage.getItem('userName')
+
   const currentGameId = localStorage.getItem('currentGameId')
   const socketUrl = process.env.serverSocket as string
 
   const parameters: Parameters = {
     userId,
+    userName,
     currentGameId,
     socketUrl,
   }

@@ -1,2 +1,10 @@
-/* import * as React from 'react'*/
-/* import * as ReactDOM from 'react-dom'*/
+import * as React from 'react'
+import { Lobby } from 'Lobby/view'
+
+export const App: React.SFC<{}> = () => {
+  return (
+    <Lobby />
+  )
+}
+
+App.displayName = 'App'
