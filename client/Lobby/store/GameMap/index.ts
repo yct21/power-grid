@@ -43,6 +43,7 @@ export const GameMap = types
     return {
       afterCreate() {
         subscription = newGame$.subscribe((game: IGame) => {
+          console.log('new game')
           self.addGame(game)
         })
       },
