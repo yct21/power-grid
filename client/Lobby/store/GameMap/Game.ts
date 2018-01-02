@@ -2,15 +2,15 @@ import { types } from 'mobx-state-tree'
 import { Player } from 'Lobby/store/GameMap/Player'
 
 export const Game = types
-  .model({
-    id: types.identifier(),
-    state: types.enumeration('GameState', ['waiting', 'started', 'ended']),
-    players: types.map(Player),
+  .model('Game', {
+    id: types.string,
+    status: types.enumeration('GameStatus', ['waiting', 'started', 'ended']),
+    players: types.array(Player),
     createdAt: types.Date,
   })
-  .preProcessSnapshot(({id, state, players, createdAt}) => ({
+  .preProcessSnapshot(({id, status, players, created_at: createdAt}) => ({
     id,
-    state,
+    status,
     players,
     createdAt: new Date(createdAt)
   }))

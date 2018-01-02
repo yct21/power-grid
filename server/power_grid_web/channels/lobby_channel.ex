@@ -17,7 +17,7 @@ defmodule PowerGridWeb.LobbyChannel do
   end
 
   def handle_in("game:create", %{"userName" => player_name, "color" => color}, socket) do
-    Lobby.create_game(socket.assigns[:user_id], player_name, color)
+    :ok = Lobby.create_game(socket.assigns[:user_id], player_name, color)
 
     {:reply, :ok, socket}
   end

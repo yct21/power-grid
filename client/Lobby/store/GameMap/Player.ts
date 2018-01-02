@@ -2,17 +2,17 @@ import { types } from 'mobx-state-tree'
 import { Color } from 'shared/models/Color'
 
 export const Player = types
-  .model({
-    id: types.identifier(),
+  .model('Player', {
+    id: types.string,
     name: types.maybe(types.string),
     color: Color,
-    joinTime: types.Date,
+    joinAt: types.Date,
   })
-  .preProcessSnapshot(({id, name, color, joinTime}) => ({
+  .preProcessSnapshot(({id, name, color, join_at: joinAt}) => ({
     id,
     name,
     color,
-    joinTime: new Date(joinTime)
+    joinAt: new Date(joinAt)
   }))
 
 export type IPlayer = typeof Player.Type

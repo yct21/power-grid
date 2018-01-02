@@ -3,10 +3,11 @@ defmodule PowerGrid.Lobby.State do
   State of GenServer PowerGrid.Lobby.Server
   """
 
+  alias __MODULE__, as: LobbyState
   alias PowerGrid.Lobby.OnlineNum
   alias PowerGrid.Lobby.GameMap
   alias PowerGrid.Schema.Game, as: SchemaGame
-  alias __MODULE__, as: LobbyState
+  alias PowerGrid.Lobby.Game
 
   defstruct [:online_num, :games]
 
@@ -25,7 +26,7 @@ defmodule PowerGrid.Lobby.State do
     %LobbyState{state | online_num: OnlineNum.decrease(online_num)}
   end
 
-  def create_game(%SchemaGame{} = schema_game, %LobbyState{games: games} = state) do
-    %LobbyState{state | games: GameMap.insert_game(schema_game, games)}
+  def create_game(%LobbyState{games: games} = state, %Game{} = new_game) do
+    %LobbyState{state | games: GameMap.new_game(games, new_game)}
   end
 end

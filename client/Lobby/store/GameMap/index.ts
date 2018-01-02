@@ -27,16 +27,23 @@ export const GameMap = types
       return self.games.values()
     },
   }))
+  // basic CRUD actions to games
+  .actions(self => ({
+    addGame (game: IGame) {
+      self.games.set(game.id, game)
+    },
+  }))
+  // listen to new games
   .actions(self => {
     // new game
     const channel: Channel = getChannel(self)
-    const newGame$ = listen$<IGame>(channel, 'game:new')
+    const newGame$ = listen$<IGame>(channel, 'games:new')
     let subscription: Subscription
 
     return {
       afterCreate() {
         subscription = newGame$.subscribe((game: IGame) => {
-          self.games.put(game)
+          self.addGame(game)
         })
       },
       beforeDestroy() {
@@ -44,6 +51,7 @@ export const GameMap = types
       }
     }
   })
+  // create games
   .extend(self => {
     const channel: Channel = getChannel(self)
     let waitForResponse = false

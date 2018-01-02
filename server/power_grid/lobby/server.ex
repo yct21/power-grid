@@ -10,8 +10,10 @@ defmodule PowerGrid.Lobby.Server do
   alias PowerGrid.Repo
   alias PowerGrid.GameServer
   alias PowerGrid.Lobby.State, as: LobbyState
+  alias PowerGrid.Lobby.Game, as: Game
 
   @update_online_num_event "onlineNum:update"
+  @new_game_event "games:new"
 
   def init(_) do
     {:ok, LobbyState.new()}
@@ -33,12 +35,14 @@ defmodule PowerGrid.Lobby.Server do
   end
 
   def handle_call(
-    {:create_game, player_id, player_name, player_color},
-    %LobbyState{} = state) do
-    game = insert_game_to_repo(player_id, player_name, player_color)
-    updated_state = LobbyState.create_game(game, state)
+      {:create_game, player_id, player_name, player_color},
+      _pid,
+      %LobbyState{} = state) do
+    new_game = Game.new(player_id, player_name, player_color)
+    updated_state = LobbyState.create_game(state, new_game)
 
     # TODO: broadcast to lobby channel
+    broadcast!(@new_game_event, new_game)
 
     {:reply, :ok, updated_state}
   end
