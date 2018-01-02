@@ -7,7 +7,7 @@ defmodule PowerGrid.Lobby.Game do
   alias PowerGrid.Schema.Game, as: SchemaGame
   alias PowerGrid.Lobby.Player, as: Player
 
-  defstruct [:id, :status, :map, :players]
+  defstruct [:id, :status, :map, :players, :created_at]
 
   @default_map :germany
 
@@ -23,6 +23,7 @@ defmodule PowerGrid.Lobby.Game do
       status: :waiting,
       map: @default_map,
       players: [owner_player],
+      created_at: Time.utc_now(),
     }
   end
 
