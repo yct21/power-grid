@@ -1,11 +1,13 @@
 import * as React from 'react'
 import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table'
+import { FlagIcon } from 'icons/FlagIcon'
 import { IGame } from 'Lobby/store/GameMap/Game'
 import * as style from 'Lobby/layout/GameList/style.css'
 
 function GameListRow (game: IGame) {
   return (
     <TableRow key={game.id}>
+      <FlagIcon nation={game.} />
       <TableCell> { game.id } </TableCell>
       <TableCell> { game.status } </TableCell>
     </TableRow>

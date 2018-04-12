@@ -5,6 +5,7 @@ export const Game = types
   .model('Game', {
     id: types.string,
     status: types.enumeration('GameStatus', ['waiting', 'started', 'ended']),
+    map: types.enumeration('GameMap', ['germany']),
     players: types.array(Player),
     createdAt: types.Date,
   })

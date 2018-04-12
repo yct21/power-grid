@@ -12,6 +12,7 @@
     "client:ut:watch": "yarn run client:ut -G --watch --watch-extensions ts"
   },
   "dependencies": {
+    "flag-icon-css": "^2.9.0",
     "material-ui": "^1.0.0-beta.23",
     "material-ui-icons": "^1.0.0-beta.17",
     "mobx": "^3.4.1",
